@@ -1,19 +1,12 @@
 package resources.actions.data;
-
 import java.sql.*;
-
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Result;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <code>List Apache projects.</code>
- */
 @Result(type = "json")
 public class ProjectsAction extends ActionSupport {
 
@@ -27,8 +20,6 @@ public class ProjectsAction extends ActionSupport {
         Statement stmt = null;
 
         projectNames = new ArrayList<String>();
-
-        Class.forName("com.mysql.jdbc.Driver");
 
         String DB_URL = "jdbc:mysql://localhost:3306/boostapp-core";
 
