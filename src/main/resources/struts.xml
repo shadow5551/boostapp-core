@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"http://struts.apache.org/dtds/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 
-  <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
-  <constant name="struts.devMode" value="true"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.devMode" value="true"/>
 
-  <constant name="struts.convention.default.parent.package" value="angularstruts"/>
-  <package name="angularstruts" extends="json-default"></package>
-  <package name="data" extends="angularstruts" namespace="/data"></package>
-
+    <constant name="struts.convention.default.parent.package" value="angularstruts"/>
+    <package name="angularstruts" namespace="/api/projects" extends="json-default">
+        <action name="projects" class="resources.actions.projects.ProjectsAction" method="getProjects   ">
+            <result type="json"/>
+        </action>
+    </package>
 </struts>
