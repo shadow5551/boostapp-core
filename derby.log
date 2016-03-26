@@ -1,0 +1,14 @@
+----------------------------------------------------------------
+Sun Mar 20 22:57:09 MSK 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0153-959a-488b-0000037780a8 
+on database directory memory:/home/euqen/dev/boostapp-core/dataSource  with class loader WebAppClassLoader=Struts Blank AngularJS App@77c1f4c 
+Loaded from file:/home/euqen/.m2/repository/org/apache/derby/derby/10.8.2.2/derby-10.8.2.2.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_80-b15
+user.dir=/home/euqen/dev/boostapp-core
+derby.system.home=null
+derby.stream.error.method=org.springframework.jdbc.datasource.embedded.OutputStreamFactory.getNoopOutputStream
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Sun Mar 20 22:59:15 MSK 2016:
+Shutting down instance a816c00e-0153-959a-488b-0000037780a8 on database directory memory:/home/euqen/dev/boostapp-core/dataSource with class loader WebAppClassLoader=Struts Blank AngularJS App@77c1f4c 

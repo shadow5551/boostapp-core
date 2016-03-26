@@ -1,4 +1,5 @@
-package resources.actions.projects;
+package resources.projects;
+
 import java.sql.*;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Result;
@@ -16,10 +17,11 @@ public class ProjectsAction extends ActionSupport {
     private List<String> projectNames;
 
     public String execute() throws Exception {
+        this.view();
         return SUCCESS;
     }
 
-    public String getProjects() throws Exception {
+    public String view() throws Exception {
         Connection conn = null;
         Statement stmt = null;
 
