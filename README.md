@@ -1,6 +1,6 @@
 Requirements:
 
- - Tomcat
+ - Jetty plugin
  - Maven
  - JDK
  
@@ -14,4 +14,4 @@ Install:
  
 Build:
  - ``$ cd boostapp-core``
- - ``$ mvn clean package``
+ - ``$ jetty:run`
