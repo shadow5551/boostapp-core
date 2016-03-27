@@ -6,11 +6,31 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
     <constant name="struts.devMode" value="true"/>
-
     <constant name="struts.convention.default.parent.package" value="angularstruts"/>
-    <package name="angularstruts" namespace="/api/projects" extends="json-default">
-        <action name="projects" class="resources.actions.projects.ProjectsAction" method="getProjects   ">
-            <result type="json"/>
+
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.Restful2ActionMapper" />
+
+    <constant name="struts.enable.SlashesInActionNames" value="true" />
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+
+    <package name="api" extends="struts-default, json-default" namespace="/api">
+        <action name="/projects/*" class="resources.projects.ProjectsAction">
+            <result type="json" />
+        </action>
+        <action name="/users/*" class="resources.users.UsersActions">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="json">
+                <param name="enableSMD">true</param>
+            </interceptor-ref>
+            <result type="json" />
         </action>
     </package>
+
+    <package name="index" extends="struts-default, json-default">
+        <action name="*" class="resources.IndexAction">
+            <result name="success">/WEB-INF/content/app.jsp</result>
+        </action>
+    </package>
+
+    <package name="angularstruts" extends="api, index" />
 </struts>

@@ -1,4 +1,4 @@
-package resources.actions;
+package resources;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
