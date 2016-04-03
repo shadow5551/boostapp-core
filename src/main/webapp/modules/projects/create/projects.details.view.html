@@ -1,0 +1,6 @@
+<h3>Project {{model.isEdit ? 'edit' : 'add'}}</h3>
+<br>
+<input type="text" placeholder="title" ng-model="model.title"><br>
+<input type="number" placeholder="amount" ng-model="model.amount"><br>
+<textarea name="" id="" cols="30" rows="10" ng-model="model.description">Description</textarea><br>
+<button ng-click="save(model)">{{model.isEdit ? 'Update' : 'Create'}}</button>

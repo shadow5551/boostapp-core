@@ -16,7 +16,7 @@ public class UserService {
     public static List<User> getAll() {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM  users");
+        Query query = session.createQuery("FROM  User");
         List<User> users = query.list();
         session.getTransaction().commit();
 

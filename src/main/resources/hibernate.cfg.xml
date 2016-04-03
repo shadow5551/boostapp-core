@@ -20,5 +20,6 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hbm2ddl.import_files">import.sql</property>
         <mapping class="resources.users.User" />
+        <mapping class="resources.projects.Project"/>
     </session-factory>
 </hibernate-configuration>

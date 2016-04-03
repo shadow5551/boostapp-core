@@ -15,7 +15,7 @@ public class ProjectService {
     public static List<Project> getAll() {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM  projects");
+        Query query = session.createQuery("FROM Project");
         List<Project> projects = query.list();
         session.getTransaction().commit();
 
@@ -47,7 +47,9 @@ public class ProjectService {
         session.beginTransaction();
         Project existingProject = (Project) session.get(Project.class, project.getId());
 
-        // work with project
+        existingProject.setTitle(project.getTitle());
+        existingProject.setDescription(project.getDescription());
+        existingProject.setAmount(project.getAmount());
 
         session.save(existingProject);
         session.getTransaction().commit();

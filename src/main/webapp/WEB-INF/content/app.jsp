@@ -25,7 +25,9 @@
 <script src="<s:url value="internal/service.js" />"></script>
 <script src="<s:url value="modules/home/home.controller.js" />"></script>
 <script src="<s:url value="modules/signup/signup.controller.js" />"></script>
+<script src="<s:url value="modules/projects/projects.controller.js" />"></script>
 <script src="<s:url value="shared/user.service.js" />"></script>
 <script src="<s:url value="modules/home/home.service.js" />"></script>
+<script src="<s:url value="modules/projects/projects.service.js" />"></script>
 </body>
 </html>

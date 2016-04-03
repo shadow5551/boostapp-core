@@ -4,19 +4,30 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import resources.infrastructure.ValidateResult;
+import resources.users.UserValidator;
 
 import java.util.List;
+import java.util.Map;
 
 @Result(type = "json")
 public class ProjectsAction extends ActionSupport {
-
     private static final long serialVersionUID = 9037336532369476225L;
     private static final Logger log = LogManager.getLogger(ProjectsAction.class);
 
+    private int id;
+
     private List<Project> projects;
+    private String title;
+    private String description;
+    private Integer amount;
+    private Boolean remove;
+
+    private List<Map<String, String>> validateErrors;
+    private ProjectValidator validator = new ProjectValidator();
 
     public String execute() throws Exception {
-        return this.view();
+        return this.create();
     }
 
     public String view() throws Exception {
@@ -26,11 +37,101 @@ public class ProjectsAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public List<Project> getProjectNames() {
-        return projects;
+    public String update() throws Exception {
+        if (this.getRemove()) {
+            ProjectService.delete(this.getId());
+            return SUCCESS;
+        }
+
+        ValidateResult data = validator.validate(this);
+
+        if (data.hasErrors()) {
+            this.setValidateErrors(data.errors);
+            return SUCCESS;
+        }
+
+        ProjectService.update(mapProject());
+
+        return SUCCESS;
+    }
+
+    public String create() throws Exception {
+        ValidateResult data = validator.validate(this);
+
+        if (data.hasErrors()) {
+            this.setValidateErrors(data.errors);
+            return SUCCESS;
+        }
+
+        ProjectService.save(mapProject());
+
+        return SUCCESS;
+    }
+
+    private Project mapProject() {
+        Project project = new Project();
+
+        project.setId(this.getId());
+        project.setTitle(this.getTitle());
+        project.setDescription(this.getDescription());
+        project.setAmount(this.getAmount());
+
+        return project;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Boolean getRemove() {
+        return this.remove;
+    }
+
+    public void setRemove(Boolean remove) {
+        this.remove = remove;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getAmount() {
+        return this.amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public List<Project> getProjects() {
+        return this.projects;
+    }
+
+    public void setValidateErrors(List<Map<String, String>> errors) {
+        this.validateErrors = errors;
+    }
+
+    public List<Map<String, String>> getValidateErrors() {
+        return this.validateErrors;
     }
 }

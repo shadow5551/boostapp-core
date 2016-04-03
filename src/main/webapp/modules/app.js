@@ -8,6 +8,18 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'modules/home/home.view.html',
             controller: 'HomeController'
         })
+        .when('/projects', {
+            templateUrl: 'modules/projects/projects.view.html',
+            controller: 'ProjectsController'
+        })
+        .when('/projects/create', {
+            templateUrl: 'modules/projects/create/projects.details.view.html',
+            controller: 'ProjectsController'
+        })
+        .when('/projects/:id/edit', {
+            templateUrl: 'modules/projects/create/projects.details.view.html',
+            controller: 'ProjectsController'
+        })
         .when('/signup', {
             templateUrl: 'modules/signup/signup.view.html',
             controller: 'SignupController'

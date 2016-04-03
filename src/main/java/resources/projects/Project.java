@@ -22,8 +22,8 @@ public class Project implements Serializable {
     @Column(name = "startOn")
     private Date startOn;
 
-    @Column(name = "depositedInCents")
-    private int depositedInCents;
+    @Column(name = "amount")
+    private Integer amount;
 
     @Column(name = "companyId")
     private int companyId;
@@ -54,12 +54,12 @@ public class Project implements Serializable {
         this.description = description;
     }
 
-    public int getDepositedInCents() {
-        return depositedInCents;
+    public Integer getAmount() {
+        return amount;
     }
 
-    public void setDepositedInCents(int depositedInCents) {
-        this.depositedInCents = depositedInCents;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public int getCompanyId() {

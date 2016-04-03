@@ -13,4 +13,10 @@ public class IndexAction extends ActionSupport {
     public String execute() {
         return SUCCESS;
     }
+    public String view() {
+        return SUCCESS;
+    }
+    public String update() {
+        return SUCCESS;
+    }
 }
