@@ -1,0 +1,23 @@
+<div>
+    <h3>{{model.title}}</h3><br>
+    <strong>{{model.description}}</strong><br>
+    <strong>${{model.amount}}</strong><br>
+    <button ng-click="addPayment()">Add payment</button>
+    <hr>
+    <hr>
+    <h4>Comments</h4>
+    <div ng-if="!comments || comments.length === 0">
+        There are no comments left
+    </div>
+    <div ng-repeat="comment in comments">
+        {{comment.commentText}}<br>
+        <span>{{comment.createdOn}}</span>
+    </div>
+    <div>
+        <h4>Create Comment</h4>
+        <textarea cols="30" rows="10" ng-model="comment">
+            Comment here
+        </textarea><br>
+        <button ng-click="createComment(comment)">Create Comment</button>
+    </div>
+</div>

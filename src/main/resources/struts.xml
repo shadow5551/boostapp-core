@@ -28,6 +28,20 @@
             </interceptor-ref>
             <result type="json" />
         </action>
+        <action name="/api/companies/*" class="resources.companies.CompanyActions">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="json">
+                <param name="enableSMD">true</param>
+            </interceptor-ref>
+            <result type="json" />
+        </action>
+        <action name="/api/comments/*" class="resources.comments.CommentActions">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="json">
+                <param name="enableSMD">true</param>
+            </interceptor-ref>
+            <result type="json" />
+        </action>
     </package>
 
     <package name="index" extends="struts-default, json-default">

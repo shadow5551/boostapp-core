@@ -12,7 +12,7 @@
 <body>
 
 <div>
-    <a href="/home">Home</a> - <a href="/projects">Projects</a>
+    <a href="/home">Home</a> - <a href="/projects">Projects</a> - <a href="/companies">Companies</a>
 </div>
 
 <div ng-controller="boostapp">
@@ -29,5 +29,7 @@
 <script src="<s:url value="shared/user.service.js" />"></script>
 <script src="<s:url value="modules/home/home.service.js" />"></script>
 <script src="<s:url value="modules/projects/projects.service.js" />"></script>
+<script src="<s:url value="modules/companies/company.service.js" />"></script>
+<script src="<s:url value="modules/companies/company.controller.js" />"></script>
 </body>
 </html>

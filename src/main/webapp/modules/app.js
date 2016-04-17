@@ -16,9 +16,21 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'modules/projects/create/projects.details.view.html',
             controller: 'ProjectsController'
         })
-        .when('/projects/:id/edit', {
+        .when('/projects/:id', {
+            templateUrl: 'modules/projects/project.page.view.html',
+            controller: 'ProjectsController'
+        })
+        .when('/projects/:id/:action', {
             templateUrl: 'modules/projects/create/projects.details.view.html',
             controller: 'ProjectsController'
+        })
+        .when('/companies', {
+            templateUrl: 'modules/companies/company.view.html',
+            controller: 'CompaniesController'
+        })
+        .when('/companies/create', {
+            templateUrl: 'modules/companies/company-create.view.html',
+            controller: 'CompaniesController'
         })
         .when('/signup', {
             templateUrl: 'modules/signup/signup.view.html',
