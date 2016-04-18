@@ -1,5 +1,7 @@
-<div ng-repeat="project in projects" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
-    <a href="/projects/{{project.id}}/edit">{{project.title}}</a> <span ng-click="remove(project.id)" style="float:right; cursor: pointer;">X</span>
-    <div>{{project.description}}</div>
-    <div>$ {{project.amount}}</div>
+<h4>Companies</h4>
+<button ng-click="createCompany()" style="float:right">Create My Company</button>
+<div ng-repeat="company in companies" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
+    <a href="/companies/{{company.id}}">{{company.title}}</a>
+    <div>{{company.tagLine}}</div>
+    <hr>
 </div>

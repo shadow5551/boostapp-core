@@ -16,11 +16,27 @@ public class UserService {
     public static List<User> getAll() {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM  User");
+        Query query = session.createQuery("FROM User");
         List<User> users = query.list();
         session.getTransaction().commit();
 
         return users;
+    }
+
+    public static User getByEmail(String email) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM User WHERE email = :email");
+        query.setParameter("email", email);
+
+        List<User> users = query.list();
+        session.getTransaction().commit();
+
+        if (users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
+        }
     }
 
     public static User getById(Integer id) {

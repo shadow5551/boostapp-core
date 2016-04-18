@@ -2,9 +2,11 @@ package resources.companies;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Result;
+import resources.infrastructure.Auth;
 import resources.infrastructure.ValidateResult;
 import resources.projects.Project;
 import resources.projects.ProjectValidator;
+import resources.users.User;
 
 import java.util.List;
 import java.util.Map;
@@ -52,6 +54,8 @@ public class CompanyActions extends ActionSupport {
     }
 
     public String create() throws Exception {
+        User user = Auth.getCurrentUser();
+
         ValidateResult data = validator.validate(this);
 
         if (data.hasErrors()) {

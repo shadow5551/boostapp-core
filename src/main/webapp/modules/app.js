@@ -11,7 +11,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         .when('/projects', {
             templateUrl: 'modules/projects/projects.view.html',
             controller: 'ProjectsController'
-        })
+           })
         .when('/projects/create', {
             templateUrl: 'modules/projects/create/projects.details.view.html',
             controller: 'ProjectsController'
@@ -35,9 +35,28 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         .when('/signup', {
             templateUrl: 'modules/signup/signup.view.html',
             controller: 'SignupController'
-        }); //add new routes here
+        })
+        .when('/signin', {
+            templateUrl: 'modules/signin/signin.view.html',
+            controller: 'SigninController'
+        })
+        .when('/404', {
+            templateUrl: 'modules/404/404.view.html',
+            controller: '404Controller'
+        })
+        .otherwise({
+            redirectTo: '/404'
+        });
+
 }]);
 
-app.controller('boostapp', function ($scope) {
-    //global app controller
+app.controller('boostapp', function ($scope, UserService) {
+    $scope.init = function() {
+        return UserService.getCurrentUser()
+            .then(function(res) {
+                $scope.currentUser = res.data.currentUser;
+            });
+    };
+
+    $scope.init();
 });

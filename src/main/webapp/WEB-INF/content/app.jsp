@@ -12,10 +12,16 @@
 <body>
 
 <div>
-    <a href="/home">Home</a> - <a href="/projects">Projects</a> - <a href="/companies">Companies</a>
+    <a href="/">Home</a> - <a href="/projects">Projects</a> - <a href="/companies">Companies</a>
 </div>
 
 <div ng-controller="boostapp">
+    <div style="float: right" ng-if="currentUser.email">
+        <a href="/user/{{currentUser.id}}">{{currentUser.email}}</a>
+    </div>
+    <div style="float: right" ng-if="!currentUser.email">
+        You are not logged in. <a href="/signin">Login</a>
+    </div>
     <div ng-view></div>
 </div>
 
@@ -25,11 +31,13 @@
 <script src="<s:url value="internal/service.js" />"></script>
 <script src="<s:url value="modules/home/home.controller.js" />"></script>
 <script src="<s:url value="modules/signup/signup.controller.js" />"></script>
+<script src="<s:url value="modules/signin/signin.controller.js" />"></script>
 <script src="<s:url value="modules/projects/projects.controller.js" />"></script>
 <script src="<s:url value="shared/user.service.js" />"></script>
 <script src="<s:url value="modules/home/home.service.js" />"></script>
 <script src="<s:url value="modules/projects/projects.service.js" />"></script>
 <script src="<s:url value="modules/companies/company.service.js" />"></script>
 <script src="<s:url value="modules/companies/company.controller.js" />"></script>
+<script src="<s:url value="modules/404/404.controller.js" />"></script>
 </body>
 </html>

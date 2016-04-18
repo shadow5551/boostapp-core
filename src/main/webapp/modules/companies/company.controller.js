@@ -1,4 +1,4 @@
-app.controller('CompaniesController', function ($scope, HomeService, CompanyService, $routeParams) {
+app.controller('CompaniesController', function ($scope, HomeService, CompanyService, $routeParams, $location) {
     $scope.projects = [];
     $scope.model = {};
 
@@ -16,7 +16,14 @@ app.controller('CompaniesController', function ($scope, HomeService, CompanyServ
     };
 
     $scope.create = function() {
-        return CompanyService.create($scope.model);
+        return CompanyService.create($scope.model)
+            .then(function() {
+                $location.path("/companies");
+            });
+    };
+
+    $scope.createCompany = function() {
+        $location.path("/companies/create");
     };
 
     return CompanyService.getCompanies()

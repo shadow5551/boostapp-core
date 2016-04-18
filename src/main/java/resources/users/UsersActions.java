@@ -4,27 +4,41 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import resources.infrastructure.Auth;
 import resources.infrastructure.ValidateResult;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 import java.util.List;
 import java.util.Map;
 
 @Result(type = "json")
-public class UsersActions extends ActionSupport {
+public class UsersActions extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 9037336567869476226L;
     private static final Logger log = LogManager.getLogger(UsersActions.class);
 
     private String email;
     private String password;
     private String repeatPassword;
+    private User currentUser;
 
+    private SessionMap<String, Object> session;
     private List<Map<String, String>> validateErrors;
     private UserValidator validator = new UserValidator();
+    private SignInValidator signInValidator = new SignInValidator();
 
     public String execute() throws Exception {
         return this.create();
     }
 
+    //context user
+    public String view() throws Exception {
+        this.setCurrentUser(Auth.getCurrentUser());
+
+        return SUCCESS;
+    }
+
+    //signup
     public String create() throws Exception {
         ValidateResult data = validator.validate(this);
 
@@ -34,6 +48,21 @@ public class UsersActions extends ActionSupport {
         }
 
         UserService.save(mapUser());
+        Auth.setCurrentUser(this.session, this.getEmail());
+
+        return SUCCESS;
+    }
+
+    //signin
+    public String update() throws Exception {
+        ValidateResult data = signInValidator.validate(this);
+
+        if (data.hasErrors()) {
+            this.setValidateErrors(data.errors);
+            return SUCCESS;
+        }
+
+        Auth.setCurrentUser(this.session, this.getEmail());
 
         return SUCCESS;
     }
@@ -76,5 +105,17 @@ public class UsersActions extends ActionSupport {
 
     public List<Map<String, String>> getValidateErrors() {
         return this.validateErrors;
+    }
+
+    public void setSession(Map<String, Object> map) {
+        this.session = (SessionMap<String, Object>) map;
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    public User getCurrentUser() {
+        return this.currentUser;
     }
 }

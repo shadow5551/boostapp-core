@@ -1,4 +1,4 @@
-app.controller('SignupController', function ($scope, UserService) {
+app.controller('SignupController', function ($scope, UserService, $location) {
 
     $scope.signup = function() {
         const user = {
@@ -7,6 +7,13 @@ app.controller('SignupController', function ($scope, UserService) {
             repeatPassword: $scope.repeatPassword
         };
 
-        return UserService.signup(user);
+        return UserService.signup(user)
+            .then(function(res) {
+                if (res.validateErrors && res.validateErrors.length > 0) {
+                    $scope.errors = res.validateErrors;
+                } else {
+                    $location.path('/home');
+                }
+            });
     }
 });
