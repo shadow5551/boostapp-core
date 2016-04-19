@@ -16,6 +16,7 @@ public class ProjectsAction extends ActionSupport {
     private static final Logger log = LogManager.getLogger(ProjectsAction.class);
 
     private int id;
+    private Integer companyId;
 
     private List<Project> projects;
     private String title;
@@ -75,6 +76,7 @@ public class ProjectsAction extends ActionSupport {
         project.setTitle(this.getTitle());
         project.setDescription(this.getDescription());
         project.setAmount(this.getAmount());
+        project.setCompanyId(this.getCompanyId());
 
         return project;
     }
@@ -85,6 +87,14 @@ public class ProjectsAction extends ActionSupport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Integer getCompanyId() {
+        return this.companyId;
+    }
+
+    public void setCompanyId(Integer id) {
+        this.companyId = id;
     }
 
     public Boolean getRemove() {

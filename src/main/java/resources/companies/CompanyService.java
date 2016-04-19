@@ -25,7 +25,10 @@ public class CompanyService {
 
     public static Company getById(Integer id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Company.class, id);
+        session.beginTransaction();
+        Company company = session.get(Company.class, id);
+        session.getTransaction().commit();
+        return company;
     }
 
     public static Company save(Company company) {

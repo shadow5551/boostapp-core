@@ -1,7 +1,11 @@
 app.controller('CompaniesController', function ($scope, HomeService, CompanyService, $routeParams, $location, context) {
-    $scope.projects = [];
     $scope.model = {};
+
     $scope.context = context.get();
+
+    if (!$scope.context) {
+        return $location.path('/404');
+    }
 
     $scope.save = function(model) {
         if (model.isEdit) {

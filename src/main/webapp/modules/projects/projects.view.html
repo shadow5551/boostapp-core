@@ -1,4 +1,8 @@
 <h4>Projects</h4>
+<div ng-if="context">
+    <a href="/projects/new">Create Project</a>
+</div>
+<br>
 <div ng-repeat="project in projects" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
     <a href="/projects/{{project.id}}/page">{{project.title}}</a>  <a href="/projects/{{project.id}}" style="float:right; cursor: pointer;">E</a> <span ng-click="remove(project.id)" style="float:right; cursor: pointer;">X</span>
     <div>{{project.description}}</div>

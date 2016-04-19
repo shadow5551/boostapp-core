@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import resources.comments.Comment;
 import resources.companies.Company;
 import resources.infrastructure.SessionHelper;
 
@@ -16,6 +17,16 @@ public class CompanyMembersService {
     public static CompanyMember getById(Integer id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(CompanyMember.class, id);
+    }
+
+    public static List<CompanyMember> getByUserId(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM CompanyMember WHERE userId = " + id);
+        List<CompanyMember> cm = query.list();
+        session.getTransaction().commit();
+
+        return cm;
     }
 
     public static void save(CompanyMember companyMember) {

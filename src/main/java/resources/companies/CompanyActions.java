@@ -8,6 +8,8 @@ import resources.projects.Project;
 import resources.projects.ProjectValidator;
 import resources.users.User;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +31,15 @@ public class CompanyActions extends ActionSupport {
     }
 
     public String view() throws Exception {
-        List<Company> companies = CompanyService.getAll();
+        User user = Auth.getCurrentUser();
+        List<CompanyMember> cms = CompanyMembersService.getByUserId(user.getId());
+
+        List<Company> companies = new ArrayList<Company>();
+        for (CompanyMember cm : cms) {
+            Company company = CompanyService.getById(cm.getCompanyId());
+            companies.add(company);
+        }
+
         this.setCompanies(companies);
 
         return SUCCESS;
@@ -54,8 +64,6 @@ public class CompanyActions extends ActionSupport {
     }
 
     public String create() throws Exception {
-        User user = Auth.getCurrentUser();
-
         ValidateResult data = validator.validate(this);
 
         if (data.hasErrors()) {
@@ -66,7 +74,7 @@ public class CompanyActions extends ActionSupport {
         Company company = CompanyService.save(mapCompany());
 
         CompanyMember cm = new CompanyMember();
-        cm.setUserId(this.getUserId());
+        cm.setUserId( Auth.getCurrentUser().getId());
         cm.setCompanyId(company.getId());
         cm.setRole("creator");
 

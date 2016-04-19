@@ -9,9 +9,14 @@ public class ProjectValidator extends Validator {
         String title = params.getTitle();
         String description = params.getDescription();
         Integer amount = params.getAmount();
+        Integer companyId = params.getCompanyId();
 
         if (title == null || description == null || amount == null) {
             this.addError("all", "All fields are required");
+        }
+
+        if (companyId == null) {
+            this.addError("company", "Please select company");
         }
 
         ValidateResult result = new ValidateResult();

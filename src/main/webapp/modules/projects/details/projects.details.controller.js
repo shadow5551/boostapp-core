@@ -1,6 +1,7 @@
-app.controller('ProjectsDetailsController', function ($scope, HomeService, ProjectsService, $routeParams, context, $location) {
+app.controller('ProjectsDetailsController', function ($scope, HomeService, CompanyService, ProjectsService, $routeParams, context, $location) {
     $scope.projects = [];
     $scope.comments = [];
+    $scope.companies = [];
 
     $scope.context = context.get();
 
@@ -18,11 +19,19 @@ app.controller('ProjectsDetailsController', function ($scope, HomeService, Proje
     function _save(model) {
         if (!$scope.isNew) {
             model.remove = false;
+            if (model.companyId) {
+                model.companyId = +model.companyId;
+            }
             return ProjectsService.updateOrDelete(model);
         } else {
             return ProjectsService.create(model);
         }
     }
+
+    CompanyService.getCompanies()
+        .then(function(data) {
+            $scope.companies = data.data.companies;
+        });
 
     if (!$scope.isNew) {
         return HomeService.getProjects()

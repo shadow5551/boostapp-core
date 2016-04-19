@@ -7,6 +7,8 @@ app.controller('CompanyCreateController', function ($scope, CompanyService, $loc
     }
 
     $scope.create = function() {
+        $scope.model.userId = $scope.context.id;
+
         return CompanyService.create($scope.model)
             .then(function() {
                 $location.path("/companies");

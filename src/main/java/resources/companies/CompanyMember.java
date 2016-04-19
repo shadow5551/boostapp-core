@@ -16,7 +16,7 @@ public class CompanyMember implements Serializable {
     private Integer companyId;
 
     @Column(name = "userId")
-    private Integer userId;
+    private int userId;
 
     @Column(name = "role")
     private String role;
@@ -43,8 +43,8 @@ public class CompanyMember implements Serializable {
         return userId;
     }
 
-    public void setUserId(Integer id) {
-        this.userId = userId;
+    public void setUserId(int id) {
+        this.userId = id;
     }
 
     public String getRole() {

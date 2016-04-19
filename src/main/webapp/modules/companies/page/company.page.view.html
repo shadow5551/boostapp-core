@@ -1,0 +1,15 @@
+{{model.title}}
+<div>{{model.tagLine}}</div>
+<hr>
+<div ng-if="!projects || projects.length === 0">
+    There are no company's projects
+</div>
+
+<div ng-if="projects && projects.length > 0">
+    Company's projects
+</div>
+<div ng-repeat="project in projects" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
+    <a href="/projects/{{project.id}}">{{project.title}}</a>
+    <div>{{project.description}}</div>
+    <hr>
+</div>

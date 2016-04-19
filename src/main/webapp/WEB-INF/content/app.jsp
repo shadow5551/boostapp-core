@@ -11,11 +11,11 @@
 </head>
 <body>
 
-<div>
-    <a href="/">Home</a> - <a href="/projects">Projects</a> - <a href="/companies">Companies</a>
-</div>
-
 <div ng-controller="boostapp">
+    <div>
+        <a href="/">Home</a> - <a href="/projects">Projects</a> - <a ng-if="context" href="/companies">My Companies</a>
+    </div>
+
     <div style="float: right" ng-if="context">
         <a href="/user/{{context.id}}">{{context.email}}</a><br>
         <a ng-click="signout()" href="#">Logout</a>
@@ -42,6 +42,7 @@
 <script src="<s:url value="modules/home/home.service.js" />"></script>
 <script src="<s:url value="modules/projects/projects.service.js" />"></script>
 <script src="<s:url value="modules/companies/company.service.js" />"></script>
+<script src="<s:url value="modules/companies/page/company.page.controller.js" />"></script>
 <script src="<s:url value="modules/companies/company.controller.js" />"></script>
 <script src="<s:url value="modules/companies/company.create.controller.js" />"></script>
 <script src="<s:url value="modules/404/404.controller.js" />"></script>

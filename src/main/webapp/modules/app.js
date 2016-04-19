@@ -28,6 +28,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'modules/companies/company-create.view.html',
             controller: 'CompanyCreateController'
         })
+        .when('/companies/:id', {
+            templateUrl: 'modules/companies/page/company.page.view.html',
+            controller: 'CompanyPageController'
+        })
         .when('/signup', {
             templateUrl: 'modules/signup/signup.view.html',
             controller: 'SignupController'
