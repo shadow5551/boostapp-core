@@ -1,4 +1,4 @@
-app.controller('SigninController', function ($scope, UserService, $location) {
+app.controller('SigninController', function ($scope, UserService, $window) {
     $scope.signin = function() {
         const user = {
             email: $scope.email,
@@ -10,7 +10,7 @@ app.controller('SigninController', function ($scope, UserService, $location) {
                if (res.validateErrors && res.validateErrors.length > 0) {
                    $scope.errors = res.validateErrors;
                } else {
-                   $location.path('/home');
+                   $window.location = '/';
                }
             });
     }

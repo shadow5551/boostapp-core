@@ -8,6 +8,10 @@ app.factory('UserService', ['Service', function(Service) {
             return Service.request('/api/users', 'PUT', user);
         },
 
+        signout: function() {
+            return Service.request('/api/users', 'PUT', {signout: true});
+        },
+
         getCurrentUser: function() {
             return Service.request('/api/users', 'GET');
         }

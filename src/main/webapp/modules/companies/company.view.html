@@ -1,5 +1,5 @@
 <h4>Companies</h4>
-<button ng-click="createCompany()" style="float:right">Create My Company</button>
+<button ng-click="createCompany()" style="float:right" ng-if="context">Create My Company</button>
 <div ng-repeat="company in companies" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
     <a href="/companies/{{company.id}}">{{company.title}}</a>
     <div>{{company.tagLine}}</div>

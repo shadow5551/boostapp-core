@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute', 'ngCookies']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
@@ -11,18 +11,14 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         .when('/projects', {
             templateUrl: 'modules/projects/projects.view.html',
             controller: 'ProjectsController'
-           })
-        .when('/projects/create', {
-            templateUrl: 'modules/projects/create/projects.details.view.html',
-            controller: 'ProjectsController'
+        })
+        .when('/projects/:id/page', {
+            templateUrl: 'modules/projects/page/projects.page.view.html',
+            controller: 'ProjectsPageController'
         })
         .when('/projects/:id', {
-            templateUrl: 'modules/projects/project.page.view.html',
-            controller: 'ProjectsController'
-        })
-        .when('/projects/:id/:action', {
-            templateUrl: 'modules/projects/create/projects.details.view.html',
-            controller: 'ProjectsController'
+            templateUrl: 'modules/projects/details/projects.details.view.html',
+            controller: 'ProjectsDetailsController'
         })
         .when('/companies', {
             templateUrl: 'modules/companies/company.view.html',
@@ -30,7 +26,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         })
         .when('/companies/create', {
             templateUrl: 'modules/companies/company-create.view.html',
-            controller: 'CompaniesController'
+            controller: 'CompanyCreateController'
         })
         .when('/signup', {
             templateUrl: 'modules/signup/signup.view.html',
@@ -50,11 +46,20 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
 }]);
 
-app.controller('boostapp', function ($scope, UserService) {
+app.controller('boostapp', function ($scope, UserService, context, $window) {
     $scope.init = function() {
         return UserService.getCurrentUser()
             .then(function(res) {
-                $scope.currentUser = res.data.currentUser;
+                context.set(res.data.currentUser);
+                $scope.context = res.data.currentUser;
+            });
+    };
+
+    $scope.signout = function() {
+        return UserService.signout()
+            .then(function() {
+                context.unset('context');
+                $window.location = '/';
             });
     };
 

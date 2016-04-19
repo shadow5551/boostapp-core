@@ -1,6 +1,7 @@
-app.controller('CompaniesController', function ($scope, HomeService, CompanyService, $routeParams, $location) {
+app.controller('CompaniesController', function ($scope, HomeService, CompanyService, $routeParams, $location, context) {
     $scope.projects = [];
     $scope.model = {};
+    $scope.context = context.get();
 
     $scope.save = function(model) {
         if (model.isEdit) {

@@ -21,4 +21,8 @@ public class Auth {
     public static void setCurrentUser(SessionMap session, String email) {
         session.put("email", email);
     }
+
+    public static void unsetCurrentUser(SessionMap session) {
+        session.remove("email");
+    }
 }

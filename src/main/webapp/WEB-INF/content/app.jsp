@@ -16,10 +16,11 @@
 </div>
 
 <div ng-controller="boostapp">
-    <div style="float: right" ng-if="currentUser.email">
-        <a href="/user/{{currentUser.id}}">{{currentUser.email}}</a>
+    <div style="float: right" ng-if="context">
+        <a href="/user/{{context.id}}">{{context.email}}</a><br>
+        <a ng-click="signout()" href="#">Logout</a>
     </div>
-    <div style="float: right" ng-if="!currentUser.email">
+    <div style="float: right" ng-if="!context.email">
         You are not logged in. <a href="/signin">Login</a>
     </div>
     <div ng-view></div>
@@ -27,17 +28,22 @@
 
 <script src="<s:url value="js/lib/angular/angular.min.js" />"></script>
 <script src="<s:url value="js/lib/angular/angular-route.min.js" />"></script>
+<script src="<s:url value="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-cookies.js" />"></script>
 <script src="<s:url value="modules/app.js" />"></script>
 <script src="<s:url value="internal/service.js" />"></script>
 <script src="<s:url value="modules/home/home.controller.js" />"></script>
 <script src="<s:url value="modules/signup/signup.controller.js" />"></script>
 <script src="<s:url value="modules/signin/signin.controller.js" />"></script>
 <script src="<s:url value="modules/projects/projects.controller.js" />"></script>
+<script src="<s:url value="modules/projects/details/projects.details.controller.js" />"></script>
+<script src="<s:url value="modules/projects/page/projects.page.controller.js" />"></script>
 <script src="<s:url value="shared/user.service.js" />"></script>
+<script src="<s:url value="shared/context.js" />"></script>
 <script src="<s:url value="modules/home/home.service.js" />"></script>
 <script src="<s:url value="modules/projects/projects.service.js" />"></script>
 <script src="<s:url value="modules/companies/company.service.js" />"></script>
 <script src="<s:url value="modules/companies/company.controller.js" />"></script>
+<script src="<s:url value="modules/companies/company.create.controller.js" />"></script>
 <script src="<s:url value="modules/404/404.controller.js" />"></script>
 </body>
 </html>

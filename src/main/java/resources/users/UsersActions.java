@@ -21,6 +21,7 @@ public class UsersActions extends ActionSupport implements SessionAware {
     private String password;
     private String repeatPassword;
     private User currentUser;
+    private boolean signout;
 
     private SessionMap<String, Object> session;
     private List<Map<String, String>> validateErrors;
@@ -33,7 +34,13 @@ public class UsersActions extends ActionSupport implements SessionAware {
 
     //context user
     public String view() throws Exception {
-        this.setCurrentUser(Auth.getCurrentUser());
+        User user = Auth.getCurrentUser();
+
+        if (user.getEmail() != null) {
+            this.setCurrentUser(user);
+        } else {
+            this.setCurrentUser(null);
+        }
 
         return SUCCESS;
     }
@@ -55,6 +62,11 @@ public class UsersActions extends ActionSupport implements SessionAware {
 
     //signin
     public String update() throws Exception {
+        if (this.getSignout()) {
+            Auth.unsetCurrentUser(this.session);
+            return SUCCESS;
+        }
+
         ValidateResult data = signInValidator.validate(this);
 
         if (data.hasErrors()) {
@@ -118,4 +130,8 @@ public class UsersActions extends ActionSupport implements SessionAware {
     public User getCurrentUser() {
         return this.currentUser;
     }
+
+    public boolean getSignout() { return this.signout; }
+
+    public void setSignout(boolean signout) { this.signout = signout; }
 }

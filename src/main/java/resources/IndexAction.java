@@ -19,4 +19,5 @@ public class IndexAction extends ActionSupport {
     public String update() {
         return SUCCESS;
     }
+    public String editNew() {return SUCCESS; }
 }
