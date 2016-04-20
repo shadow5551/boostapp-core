@@ -9,18 +9,9 @@ app.controller('ProjectsPageController', function ($scope, HomeService, Projects
             });
     };
 
-    return HomeService.getProjects()
+    return ProjectsService.getById($routeParams.id)
         .then(function(data) {
-            $scope.projects = data.data.projects;
-
-            if ($routeParams.id) {
-                $scope.model = $scope.projects.find(function(p) {
-                    if(+p.id === +$routeParams.id) {
-                        $routeParams.action === 'edit' ? p.isEdit = true : p.view = true;
-                        return p;
-                    }
-                });
-            }
+            $scope.model = data.data.project;
 
             if (!$routeParams.id || !$scope.model) {
                 $location.path('/404');

@@ -1,7 +1,7 @@
 app.factory('ProjectsService', ['Service', function(Service) {
     return {
-        getProjects: function() {
-            return Service.request('/api/projects');
+        getProjects: function(companyId) {
+            return Service.request('/api/projects?companyId=' + companyId);
         },
 
         create: function(data) {
@@ -18,6 +18,10 @@ app.factory('ProjectsService', ['Service', function(Service) {
 
         getComments: function(projectId) {
             return Service.request('api/comments?projectId=' + projectId, 'GET')
+        },
+
+        getById: function(id) {
+            return Service.request('api/project?id='+id);
         }
     }
 }]);

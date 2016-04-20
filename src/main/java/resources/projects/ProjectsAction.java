@@ -32,8 +32,13 @@ public class ProjectsAction extends ActionSupport {
     }
 
     public String view() throws Exception {
-        List<Project> projects = ProjectService.getAll();
-        this.setProjects(projects);
+        if (this.getCompanyId() != null) {
+            List<Project> projects = ProjectService.getByCompanyId(this.getCompanyId());
+            this.setProjects(projects);
+        } else {
+            List<Project> projects = ProjectService.getAll();
+            this.setProjects(projects);
+        }
 
         return SUCCESS;
     }

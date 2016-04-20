@@ -41,8 +41,11 @@ public class UserService {
 
     public static User getById(Integer id) {
         Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        User user = session.get(User.class, id);
+        session.getTransaction().commit();
 
-        return session.get(User.class, id);
+        return user;
     }
 
     public static void save(User user) {

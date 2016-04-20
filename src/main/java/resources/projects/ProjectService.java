@@ -22,9 +22,23 @@ public class ProjectService {
         return projects;
     }
 
+    public static List<Project> getByCompanyId(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM Project WHERE companyId = " + id);
+        List<Project> projects = query.list();
+        session.getTransaction().commit();
+
+        return projects;
+    }
+
     public static Project getById(Integer id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Project.class, id);
+        session.beginTransaction();
+        Project p = session.get(Project.class, id);
+        session.getTransaction().commit();
+
+        return p;
     }
 
     public static void save(Project project) {

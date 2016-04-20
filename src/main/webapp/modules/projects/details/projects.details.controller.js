@@ -34,17 +34,9 @@ app.controller('ProjectsDetailsController', function ($scope, HomeService, Compa
         });
 
     if (!$scope.isNew) {
-        return HomeService.getProjects()
+        return ProjectsService.getById($routeParams.id)
             .then(function (data) {
-                $scope.projects = data.data.projects;
-
-                if ($routeParams.id) {
-                    $scope.model = $scope.projects.find(function (p) {
-                        if (+p.id === +$routeParams.id) {
-                            return p;
-                        }
-                    });
-                }
+                $scope.model = data.data.project;
 
                 if (!$scope.model) {
                     $location.path('/404');

@@ -14,7 +14,12 @@ app.controller('ProjectsController', function ($scope, HomeService, ProjectsServ
     };
 
     $scope.remove = function(id) {
-        return ProjectsService.updateOrDelete({id: id, remove: true});
+        return ProjectsService.updateOrDelete({id: id, remove: true})
+            .then(function() {
+                $scope.projects = $scope.projects.filter(function(p) {
+                    return p.id != id;
+                });
+            })
     };
 
     return HomeService.getProjects()

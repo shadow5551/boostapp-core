@@ -1,5 +1,5 @@
 <div ng-repeat="project in projects" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
-    <a href="/projects/{{project.id}}">{{project.title}}</a>  <a href="/projects/{{project.id}}/edit" style="float:right; cursor: pointer;">E</a> <span ng-click="remove(project.id)" style="float:right; cursor: pointer;">X</span>
+    <a href="/projects/{{project.id}}/page">{{project.title}}</a>  <a href="/projects/{{project.id}}" style="float:right; cursor: pointer;">E</a> <span ng-click="remove(project.id)" style="float:right; cursor: pointer;">X</span>
     <div>{{project.description}}</div>
     <div>$ {{project.amount}}</div>
 </div>

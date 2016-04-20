@@ -10,6 +10,10 @@ app.factory('CompanyService', ['Service', function(Service) {
 
         updateOrDelete: function(data) {
             return Service.request('/api/companies', 'PUT', data);
+        },
+
+        getById: function(id) {
+            return Service.request('/api/company?id=' + id);
         }
     }
 }]);

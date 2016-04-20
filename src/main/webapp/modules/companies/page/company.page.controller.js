@@ -3,31 +3,17 @@ app.controller('CompanyPageController', function ($scope, HomeService, CompanySe
     $scope.context = context.get();
     $scope.projects = [];
 
-    return CompanyService.getCompanies()
+    return CompanyService.getById($routeParams.id)
         .then(function(data) {
-            $scope.companies = data.data.companies;
-
-            if ($routeParams.id) {
-                $scope.model = $scope.companies.find(function(p) {
-                    if(+p.id === +$routeParams.id) {
-                        return p;
-                    }
-                });
-            }
+            $scope.model = data.data.company;
 
             if (!$routeParams.id || !$scope.model) {
                 $location.path('/404');
             } else {
-                return ProjectsService.getProjects();
+                return ProjectsService.getProjects($routeParams.id);
             }
         })
         .then(function(projects) {
-            if (projects) {
-                $scope.projects = projects.data.projects.filter(function(p) {
-                    if(+p.companyId === +$routeParams.id) {
-                        return p;
-                    }
-                });
-            }
-        })
+            $scope.projects = projects.data.projects;
+        });
 });
