@@ -1,7 +1,8 @@
-app.controller('UserPageController', function ($scope, UserService, InviteService, $routeParams, CompanyService, $location, context) {
+app.controller('UserPageController', function ($scope, UserService,ProjectsService, PaymentService, InviteService, $routeParams, CompanyService, $location, context) {
     $scope.context = context.get();
     $scope.model = {};
     $scope.errors = [];
+    $scope.payments = [];
 
     $scope.invite = function () {
         return InviteService.invite({
@@ -63,5 +64,19 @@ app.controller('UserPageController', function ($scope, UserService, InviteServic
             });
 
             $scope.invites = invites.data.invites;
+
+            return PaymentService.getByUserId($routeParams.id);
+        })
+        .then(function(payments) {
+            if (payments.data.payments) {
+                $scope.payments = payments.data.payments;
+
+                $scope.payments.forEach(function(p) {
+                    return ProjectsService.getById(p.projectId)
+                        .then(function(project) {
+                            p.project = project.data.project;
+                        });
+                });
+            }
         });
 });

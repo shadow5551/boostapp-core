@@ -4,17 +4,29 @@
 
 {{user.email}}
 <br><br>
-<div ng-if="context.id != user.id">
+<div ng-if="context && context.id != user.id">
     <select ng-model="model.companyId">
         <option ng-repeat="company in companies" ng-value="company.id">{{company.title}}</option>
     </select>
     <button ng-click="invite()">Invite user to company</button>
 </div>
 
+<hr>
+<div ng-if="!payments || payments.length === 0">
+    There are no payments found
+</div>
+<div ng-if="payments && payments.length > 0">
+    User's donations
+</div>
+<div ng-repeat="payment in payments">
+    {{payment.amountInCents / 100}}$ {{comment.createdOn}} <a href="/projects/{{payment.project.id}}/page">{{payment.project.title}}</a>
+</div>
+<hr>
+
 <div ng-if="context.id == user.id && invites.length > 0">
     <h4>My pending invites</h4>
     <div ng-repeat="invite in invites">
-        {{invite.user.email}} {{invite.createdOn}} {{invite.status}} {{invite.company.title}}
+        {{invite.user.email}} {{invite.createdOn}} {{invite.status}} <a href="/companies/{{invite.company.id}}">{{invite.company.title}}</a>
         <button ng-click="accept(invite.id, invite.companyId)">Accept Invite</button>
         <button ng-click="decline(invite.id, invite.companyId)">Decline Invite</button>
     </div>

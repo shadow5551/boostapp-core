@@ -25,6 +25,9 @@ public class Project implements Serializable {
     @Column(name = "amount")
     private Integer amount;
 
+    @Column(name = "paymentAmount")
+    private Integer paymentAmount;
+
     @Column(name = "companyId")
     private int companyId;
 
@@ -68,5 +71,13 @@ public class Project implements Serializable {
 
     public void setCompanyId(int companyId) {
         this.companyId = companyId;
+    }
+
+    public Integer getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(int paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 }

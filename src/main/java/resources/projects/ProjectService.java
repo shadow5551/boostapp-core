@@ -64,6 +64,7 @@ public class ProjectService {
         existingProject.setTitle(project.getTitle());
         existingProject.setDescription(project.getDescription());
         existingProject.setAmount(project.getAmount());
+        existingProject.setPaymentAmount(project.getPaymentAmount());
 
         session.save(existingProject);
         session.getTransaction().commit();

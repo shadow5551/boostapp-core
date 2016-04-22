@@ -1,9 +1,27 @@
 <div>
+    <div ng-repeat="error in errors" style="background: crimson">
+        {{error}}
+    </div>
+
     <h3>{{model.title}}</h3><br>
     <strong>{{model.description}}</strong><br>
-    <strong>${{model.amount}}</strong><br>
-    <button ng-click="addPayment()">Add payment</button>
+    <strong>Full Amount: ${{model.amount}}</strong><br>
+    <strong>Payment Amount: ${{model.paymentAmount}}</strong>
+    <div style="background: #00FFaa" ng-if="model.paymentAmount > model.amount">
+        Project completely deposited. Congrats!
+    </div>
+    <br>
+    <div ng-if="context">
+        <input type="number" ng-model="model.payment" placeholder="Add payment amount here">
+        <button ng-click="addPayment()">Add payment</button>
+    </div>
     <hr>
+    <div ng-if="!payments || payments.length === 0">
+        There are no payments left
+    </div>
+    <div ng-repeat="payment in payments">
+        {{payment.amountInCents / 100}}$ {{comment.createdOn}} <a href="/user/{{payment.user.id}}">{{payment.user.email}}</a>
+    </div>
     <hr>
     <h4>Comments</h4>
     <div ng-if="!comments || comments.length === 0">
