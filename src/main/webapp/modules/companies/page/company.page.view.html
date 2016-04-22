@@ -6,10 +6,18 @@
 </div>
 
 <div ng-if="projects && projects.length > 0">
-    Company's projects
+    <h4>Company's projects</h4>
 </div>
 <div ng-repeat="project in projects" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
     <a href="/projects/{{project.id}}">{{project.title}}</a>
+
     <div>{{project.description}}</div>
     <hr>
+</div>
+
+<div ng-if="invites.length > 0">
+    <h4>Pending invites to company</h4>
+    <div ng-repeat="invite in invites">
+        {{invite.user.email}} {{invite.createdOn}} {{invite.status}}
+    </div>
 </div>

@@ -25,5 +25,6 @@
         <mapping class="resources.companies.Company"/>
         <mapping class="resources.companies.CompanyMember"/>
         <mapping class="resources.comments.Comment"/>
+        <mapping class="resources.invites.Invite"/>
     </session-factory>
 </hibernate-configuration>

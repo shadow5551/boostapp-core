@@ -29,6 +29,16 @@ public class CompanyMembersService {
         return cm;
     }
 
+    public static CompanyMember getUserInCompany(Integer userId, Integer companyId) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM CompanyMember WHERE userId = " + userId + " AND companyId = " + companyId);
+        List<CompanyMember> cm = query.list();
+        session.getTransaction().commit();
+
+        return cm.isEmpty() ? null : cm.get(0);
+    }
+
     public static void save(CompanyMember companyMember) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();

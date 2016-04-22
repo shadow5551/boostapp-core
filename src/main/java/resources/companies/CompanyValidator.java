@@ -8,7 +8,6 @@ import resources.users.User;
 public class CompanyValidator extends Validator {
 
     public ValidateResult validate(CompanyActions params) {
-
         User user = Auth.getCurrentUser();
 
         if (user == null) {

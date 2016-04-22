@@ -1,4 +1,4 @@
-app.controller('CompanyPageController', function ($scope, HomeService, CompanyService, ProjectsService, $routeParams, $location, context) {
+app.controller('CompanyPageController', function ($scope, HomeService, InviteService, CompanyService, ProjectsService, UserService, $routeParams, $location, context) {
     $scope.model = {};
     $scope.context = context.get();
     $scope.projects = [];
@@ -15,5 +15,17 @@ app.controller('CompanyPageController', function ($scope, HomeService, CompanySe
         })
         .then(function(projects) {
             $scope.projects = projects.data.projects;
+
+            return InviteService.getInvitesByCompanyId($routeParams.id);
+        })
+        .then(function(invites) {
+            invites.data.invites.forEach(function(i) {
+               return UserService.getById(i.userId)
+                   .then(function(user) {
+                       i.user = user.data.user;
+                   });
+            });
+
+            $scope.invites = invites.data.invites;
         });
 });

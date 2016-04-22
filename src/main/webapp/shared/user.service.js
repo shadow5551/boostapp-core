@@ -12,8 +12,20 @@ app.factory('UserService', ['Service', function(Service) {
             return Service.request('/api/users', 'PUT', {signout: true});
         },
 
+        invite: function(invite) {
+            return Service.request('/api/invites', 'POST', invite);
+        },
+
+        getInvitesByUserId: function(id) {
+            return Service.request('api/invites?userId='+id);
+        },
+
         getCurrentUser: function() {
             return Service.request('/api/users', 'GET');
+        },
+
+        getById: function(id) {
+            return Service.request('/api/user?id='+id);
         }
     }
 }]);
