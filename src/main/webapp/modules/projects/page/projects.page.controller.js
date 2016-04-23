@@ -24,7 +24,7 @@ app.controller('ProjectsPageController', function ($scope, context, PaymentServi
 
     $scope.addPayment = function() {
         return PaymentService.createPayment({
-            projectId: $routeParams.id,
+            projectId: +$routeParams.id,
             userId: $scope.context.id,
             amountInCents: !$scope.model.payment ? 0 : $scope.model.payment * 100
         })

@@ -5,6 +5,10 @@ app.controller('ProjectsDetailsController', function ($scope, HomeService, Compa
 
     $scope.context = context.get();
 
+    if (!$scope.context) {
+        $location.path('/404');
+    }
+
     if ($routeParams.id === 'new') {
         $scope.isNew = true;
     }

@@ -86,7 +86,7 @@ public class PaymentActions extends ActionSupport {
         this.remove = remove;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(Integer projectId) {
         this.projectId = projectId;
     }
 
@@ -114,7 +114,7 @@ public class PaymentActions extends ActionSupport {
         return this.userId;
     }
 
-    public void setUserId(int id) {
+    public void setUserId(Integer id) {
         this.userId = id;
     }
 
