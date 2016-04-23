@@ -3,6 +3,7 @@ package resources.comments;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Result;
 import resources.companies.Company;
+import resources.infrastructure.Auth;
 import resources.infrastructure.ValidateResult;
 import resources.projects.Project;
 import resources.projects.ProjectValidator;
@@ -54,6 +55,7 @@ public class CommentActions extends ActionSupport {
         comment.setId(this.getId());
         comment.setProjectId(this.getProjectId());
         comment.setCommentText(this.getCommentText());
+        comment.setUserId(this.getUserId());
         comment.setCreatedOn(new Date());
 
         return comment;

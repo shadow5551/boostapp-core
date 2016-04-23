@@ -21,6 +21,9 @@ public class Comment implements Serializable {
     @Column(name = "projectId")
     private int projectId;
 
+    @Column(name = "userId")
+    private int userId;
+
     public Comment () {}
 
     public int getId() {
@@ -37,6 +40,14 @@ public class Comment implements Serializable {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public Date getCreatedOn() {

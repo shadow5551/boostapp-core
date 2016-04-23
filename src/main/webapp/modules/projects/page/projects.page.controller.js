@@ -57,6 +57,13 @@ app.controller('ProjectsPageController', function ($scope, context, PaymentServi
                 $scope.comments = res.data.comments;
             }
 
+            $scope.comments.forEach(function(c) {
+                return UserService.getById(c.userId)
+                    .then(function(user) {
+                        c.user = user.data.user;
+                    });
+            });
+
             return PaymentService.getAllByProjectId($routeParams.id);
         })
         .then(function(res) {

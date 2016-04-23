@@ -19,19 +19,23 @@
     <div ng-if="!payments || payments.length === 0">
         There are no payments left
     </div>
+    <div ng-if="payments.length > 0">
+        <h4>Payments</h4>
+    </div>
     <div ng-repeat="payment in payments">
-        {{payment.amountInCents / 100}}$ {{comment.createdOn}} <a href="/user/{{payment.user.id}}">{{payment.user.email}}</a>
+        {{payment.amountInCents / 100}}$ {{payment.createdOn}} <a href="/user/{{payment.user.id}}">{{payment.user.email}}</a>
     </div>
     <hr>
     <h4>Comments</h4>
     <div ng-if="!comments || comments.length === 0">
         There are no comments left
     </div>
-    <div ng-repeat="comment in comments">
+    <div ng-repeat="comment in comments" style="background: lightblue; width: 300px; margin: 5px;">
+        User <a href="/user/{{comment.user.id}}">{{comment.user.email}}</a> wrote: <br>
         {{comment.commentText}}<br>
         <span>{{comment.createdOn}}</span>
     </div>
-    <div>
+    <div ng-if="context">
         <h4>Create Comment</h4>
         <textarea cols="30" rows="10" ng-model="comment">
             Comment here

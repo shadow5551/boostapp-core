@@ -1,7 +1,11 @@
 app.factory('context', ['$cookieStore', function ($cookieStore) {
     return {
         set: function(data) {
-            $cookieStore.put('context', data);
+            if (data) {
+                $cookieStore.put('context', data);
+            } else {
+                this.unset();
+            }
         },
 
         get: function() {
