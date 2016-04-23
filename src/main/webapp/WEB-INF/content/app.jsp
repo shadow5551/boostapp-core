@@ -42,12 +42,12 @@
 <script src="<s:url value="modules/home/home.service.js" />"></script>
 <script src="<s:url value="modules/projects/projects.service.js" />"></script>
 <script src="<s:url value="modules/companies/company.service.js" />"></script>
+<script src="<s:url value="modules/companies/details/company.details.controller.js" />"></script>
 <script src="<s:url value="modules/companies/page/company.page.controller.js" />"></script>
 <script src="<s:url value="modules/users/page/user.page.controller.js" />"></script>
 <script src="<s:url value="shared/invite.service.js" />"></script>
 <script src="<s:url value="shared/payment.service.js" />"></script>
 <script src="<s:url value="modules/companies/company.controller.js" />"></script>
-<script src="<s:url value="modules/companies/company.create.controller.js" />"></script>
 <script src="<s:url value="modules/404/404.controller.js" />"></script>
 </body>
 </html>

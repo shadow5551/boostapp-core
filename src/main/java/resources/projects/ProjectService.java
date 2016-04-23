@@ -52,7 +52,9 @@ public class ProjectService {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Project project = (Project) session.get(Project.class, id);
-        session.delete(project);
+        if (project != null) {
+            session.delete(project);
+        }
         session.getTransaction().commit();
     }
 

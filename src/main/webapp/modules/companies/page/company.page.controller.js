@@ -2,6 +2,24 @@ app.controller('CompanyPageController', function ($scope, HomeService, InviteSer
     $scope.model = {};
     $scope.context = context.get();
     $scope.projects = [];
+    $scope.errors = [];
+
+    $scope.removeProject = function(projectId) {
+        if (confirm("Are you sure?")) {
+            return ProjectsService.delete({
+                id: projectId
+                })
+                .then(function (data) {
+                    if (data.validateErrors && data.validateErrors.length > 0) {
+                        $scope.errors = data.validateErrors;
+                    } else {
+                        $scope.projects = $scope.projects.filter(function (p) {
+                            return p.id != projectId;
+                        });
+                    }
+                });
+        }
+    };
 
     return CompanyService.getById($routeParams.id)
         .then(function(data) {
@@ -14,9 +32,11 @@ app.controller('CompanyPageController', function ($scope, HomeService, InviteSer
             }
         })
         .then(function(projects) {
-            $scope.projects = projects.data.projects;
+            if (projects.data.projects) {
+                $scope.projects = projects.data.projects;
 
-            return InviteService.getInvitesByCompanyId($routeParams.id);
+                return InviteService.getInvitesByCompanyId($routeParams.id);
+            }
         })
         .then(function(invites) {
             invites.data.invites.forEach(function(i) {

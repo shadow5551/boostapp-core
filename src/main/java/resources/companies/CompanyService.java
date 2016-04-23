@@ -48,7 +48,7 @@ public class CompanyService {
         session.getTransaction().commit();
     }
 
-    public static void update(Company company) {
+    public static Company update(Company company) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Company existingCompany = (Company) session.get(Company.class, company.getId());
@@ -58,5 +58,7 @@ public class CompanyService {
 
         session.save(existingCompany);
         session.getTransaction().commit();
+
+        return existingCompany;
     }
 }

@@ -20,8 +20,9 @@ public class CompanyActions extends ActionSupport {
     private List<Company> companies;
     private String title;
     private String tagLine;
-    private Boolean remove;
+    private boolean remove;
     private int userId;
+    private Company company;
 
     private List<Map<String, String>> validateErrors;
     private CompanyValidator validator = new CompanyValidator();
@@ -37,7 +38,9 @@ public class CompanyActions extends ActionSupport {
         List<Company> companies = new ArrayList<Company>();
         for (CompanyMember cm : cms) {
             Company company = CompanyService.getById(cm.getCompanyId());
-            companies.add(company);
+            if (company != null) {
+                companies.add(company);
+            }
         }
 
         this.setCompanies(companies);
@@ -58,7 +61,8 @@ public class CompanyActions extends ActionSupport {
             return SUCCESS;
         }
 
-        CompanyService.update(mapCompany());
+        Company company = CompanyService.update(mapCompany());
+        this.setCompany(company);
 
         return SUCCESS;
     }
@@ -74,11 +78,12 @@ public class CompanyActions extends ActionSupport {
         Company company = CompanyService.save(mapCompany());
 
         CompanyMember cm = new CompanyMember();
-        cm.setUserId( Auth.getCurrentUser().getId());
+        cm.setUserId(Auth.getCurrentUser().getId());
         cm.setCompanyId(company.getId());
         cm.setRole("creator");
 
         CompanyMembersService.save(cm);
+        this.setCompany(company);
 
         return SUCCESS;
     }
@@ -101,11 +106,11 @@ public class CompanyActions extends ActionSupport {
         this.id = id;
     }
 
-    public Boolean getRemove() {
+    public boolean getRemove() {
         return this.remove;
     }
 
-    public void setRemove(Boolean remove) {
+    public void setRemove(boolean remove) {
         this.remove = remove;
     }
 
@@ -147,5 +152,13 @@ public class CompanyActions extends ActionSupport {
 
     public void setUserId(int id) {
         this.userId = id;
+    }
+
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(Company c) {
+        this.company = c;
     }
 }

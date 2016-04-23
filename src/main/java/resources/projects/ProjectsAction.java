@@ -22,10 +22,11 @@ public class ProjectsAction extends ActionSupport {
     private String title;
     private String description;
     private Integer amount;
-    private Boolean remove;
+    private boolean remove;
 
     private List<Map<String, String>> validateErrors;
     private ProjectValidator validator = new ProjectValidator();
+    private ProjectRemoveValidator removeValidator = new ProjectRemoveValidator();
 
     public String execute() throws Exception {
         return this.create();
@@ -45,18 +46,24 @@ public class ProjectsAction extends ActionSupport {
 
     public String update() throws Exception {
         if (this.getRemove()) {
+            ValidateResult data = removeValidator.validate(this);
+
+            if (data.hasErrors()) {
+                this.setValidateErrors(data.errors);
+                return SUCCESS;
+            }
+
             ProjectService.delete(this.getId());
-            return SUCCESS;
+        } else {
+            ValidateResult data = validator.validate(this);
+
+            if (data.hasErrors()) {
+                this.setValidateErrors(data.errors);
+                return SUCCESS;
+            }
+
+            ProjectService.update(mapProject());
         }
-
-        ValidateResult data = validator.validate(this);
-
-        if (data.hasErrors()) {
-            this.setValidateErrors(data.errors);
-            return SUCCESS;
-        }
-
-        ProjectService.update(mapProject());
 
         return SUCCESS;
     }
@@ -102,11 +109,11 @@ public class ProjectsAction extends ActionSupport {
         this.companyId = id;
     }
 
-    public Boolean getRemove() {
+    public boolean getRemove() {
         return this.remove;
     }
 
-    public void setRemove(Boolean remove) {
+    public void setRemove(boolean remove) {
         this.remove = remove;
     }
 

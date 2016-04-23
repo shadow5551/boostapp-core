@@ -8,7 +8,12 @@ app.factory('CompanyService', ['Service', function(Service) {
             return Service.request('/api/companies', 'POST', data);
         },
 
-        updateOrDelete: function(data) {
+        update: function(data) {
+            return Service.request('/api/companies', 'PUT', data);
+        },
+
+        delete: function(data) {
+            data.remove = true;
             return Service.request('/api/companies', 'PUT', data);
         },
 

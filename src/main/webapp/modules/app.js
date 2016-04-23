@@ -24,13 +24,13 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'modules/companies/company.view.html',
             controller: 'CompaniesController'
         })
-        .when('/companies/create', {
-            templateUrl: 'modules/companies/company-create.view.html',
-            controller: 'CompanyCreateController'
-        })
-        .when('/companies/:id', {
+        .when('/companies/:id/page', {
             templateUrl: 'modules/companies/page/company.page.view.html',
             controller: 'CompanyPageController'
+        })
+        .when('/companies/:id', {
+            templateUrl: 'modules/companies/details/company.details.view.html',
+            controller: 'CompanyDetailsController'
         })
         .when('/user/:id', {
             templateUrl: 'modules/users/page/user.page.view.html',

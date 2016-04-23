@@ -1,4 +1,8 @@
-{{model.title}}
+<div ng-repeat="error in errors" style="background: crimson">
+    {{error}}
+</div>
+
+<h3>{{model.title}} <a href="/companies/{{model.id}}">Edit</a></h3>
 <div>{{model.tagLine}}</div>
 <hr>
 <div ng-if="!projects || projects.length === 0">
@@ -8,11 +12,12 @@
 <div ng-if="projects && projects.length > 0">
     <h4>Company's projects</h4>
 </div>
-<div ng-repeat="project in projects" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
-    <a href="/projects/{{project.id}}">{{project.title}}</a>
-
+<div ng-repeat="project in projects" style="background: #00FFaa; width: 300px; margin: 5px;padding: 5px;">
+    <a href="/projects/{{project.id}}/page">{{project.title}}</a>
     <div>{{project.description}}</div>
-    <hr>
+    <div>${{project.paymentAmount / 100}} of ${{project.amount / 100}}</div>
+    <div style="float:right"><a href="/projects/{{project.id}}">Edit</a> / <a href="#" ng-click="removeProject(project.id)">Remove</a></div>
+    <div style="clear: both"></div>
 </div>
 
 <div ng-if="invites.length > 0">
