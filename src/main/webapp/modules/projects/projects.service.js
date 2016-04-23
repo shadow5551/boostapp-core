@@ -13,6 +13,7 @@ app.factory('ProjectsService', ['Service', function(Service) {
         },
 
         createComment: function(data) {
+            console.log(data);
             return Service.request('/api/comments', 'POST', data);
         },
 

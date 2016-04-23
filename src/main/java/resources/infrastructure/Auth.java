@@ -14,7 +14,7 @@ public class Auth {
         if (session.get("email") != null) {
             return UserService.getByEmail(session.get("email").toString());
         } else {
-            return new User();
+            return null;
         }
     }
 

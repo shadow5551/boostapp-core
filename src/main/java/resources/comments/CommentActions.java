@@ -17,12 +17,12 @@ public class CommentActions extends ActionSupport {
 
     private List<Comment> comments;
     private Boolean remove;
-    private int userId;
+    private Integer userId;
     private String commentText;
-    private int projectId;
+    private Integer projectId;
 
     private List<Map<String, String>> validateErrors;
-//    private CommentValidator validator = new CommentValidator();
+    private CommentValidator validator = new CommentValidator();
 
     public String execute() throws Exception {
         return this.create();
@@ -36,14 +36,14 @@ public class CommentActions extends ActionSupport {
     }
 
     public String create() throws Exception {
-//        ValidateResult data = validator.validate(this);
-//
-//        if (data.hasErrors()) {
-//            this.setValidateErrors(data.errors);
-//            return SUCCESS;
-//        }
+        ValidateResult data = validator.validate(this);
 
-        Comment comment = CommentService.save(mapComment());
+        if (data.hasErrors()) {
+            this.setValidateErrors(data.errors);
+            return SUCCESS;
+        }
+
+        CommentService.save(mapComment());
 
         return SUCCESS;
     }
@@ -83,11 +83,11 @@ public class CommentActions extends ActionSupport {
         this.commentText = commentText;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(Integer projectId) {
         this.projectId = projectId;
     }
 
-    public int getProjectId() {
+    public Integer getProjectId() {
         return this.projectId;
     }
 
@@ -107,11 +107,11 @@ public class CommentActions extends ActionSupport {
         return this.validateErrors;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 
-    public void setUserId(int id) {
+    public void setUserId(Integer id) {
         this.userId = id;
     }
 }

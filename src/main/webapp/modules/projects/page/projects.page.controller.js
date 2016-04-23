@@ -7,10 +7,19 @@ app.controller('ProjectsPageController', function ($scope, context, PaymentServi
     $scope.context = context.get();
 
     $scope.createComment = function(comment) {
-        return ProjectsService.createComment({projectId: $routeParams.id, commentText: comment})
-            .then(function() {
-                $scope.comments.push({commentText: comment, createdOn: new Date()});
-            });
+        return ProjectsService.createComment({
+            projectId: +$routeParams.id,
+            userId: +$scope.context.id,
+            commentText: comment
+        })
+        .then(function(res) {
+                if (res.validateErrors && res.validateErrors.length > 0) {
+                    $scope.errors = res.validateErrors;
+                } else {
+                    $scope.errors = [];
+                    $scope.comments.push({commentText: comment, createdOn: new Date()});
+                }
+        });
     };
 
     $scope.addPayment = function() {
