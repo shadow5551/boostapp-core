@@ -1,4 +1,4 @@
-app.controller('SignupController', function ($scope, UserService, $location) {
+app.controller('SignupController', function ($scope, UserService, $window) {
 
     $scope.signup = function() {
         const user = {
@@ -12,7 +12,7 @@ app.controller('SignupController', function ($scope, UserService, $location) {
                 if (res.validateErrors && res.validateErrors.length > 0) {
                     $scope.errors = res.validateErrors;
                 } else {
-                    $location.path('/home');
+                    $window.location = '/';
                 }
             });
     }

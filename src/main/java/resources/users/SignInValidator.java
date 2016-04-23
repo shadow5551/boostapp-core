@@ -21,7 +21,6 @@ public class SignInValidator extends Validator {
         }
 
         User user = UserService.getByEmail(email);
-
         if (user == null) {
             this.addError("user", "Such user does not exists");
         } else if (!user.getPassword().contentEquals(password)) {
