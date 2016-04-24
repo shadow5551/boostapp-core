@@ -3,7 +3,7 @@
         {{error}}
     </div>
 
-    <h3>{{model.title}}</h3><br>
+    <h3>{{model.title}} <a href="/projects/{{model.id}}">Edit</a> / <a href="#" ng-click="remove()">Remove</a></h3><br>
     <strong>{{model.description}}</strong><br>
     <strong>Full Amount: ${{model.amount}}</strong><br>
     <strong>Payment Amount: ${{model.paymentAmount}}</strong>

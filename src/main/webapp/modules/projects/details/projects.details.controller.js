@@ -2,11 +2,12 @@ app.controller('ProjectsDetailsController', function ($scope, HomeService, Compa
     $scope.projects = [];
     $scope.comments = [];
     $scope.companies = [];
+    $scope.errors = [];
 
     $scope.context = context.get();
 
     if (!$scope.context) {
-        $location.path('/404');
+       return $location.path('/404');
     }
 
     if ($routeParams.id === 'new') {
@@ -15,8 +16,12 @@ app.controller('ProjectsDetailsController', function ($scope, HomeService, Compa
 
     $scope.save = function(model) {
         return _save(model)
-            .then(function() {
-               $location.path('/projects');
+            .then(function(data) {
+                if (data.validateErrors && data.validateErrors.length > 0) {
+                    $scope.errors = data.validateErrors;
+                } else {
+                    $location.path('/projects');
+                }
             });
     };
 
@@ -26,7 +31,7 @@ app.controller('ProjectsDetailsController', function ($scope, HomeService, Compa
             if (model.companyId) {
                 model.companyId = +model.companyId;
             }
-            return ProjectsService.updateOrDelete(model);
+            return ProjectsService.update(model);
         } else {
             return ProjectsService.create(model);
         }
