@@ -25,11 +25,10 @@ app.controller('ProjectsPageController', function ($scope, context, PaymentServi
     $scope.remove = function() {
         return ProjectsService.delete({id: $routeParams.id, remove: true})
             .then(function(data) {
-                if (res.validateErrors && res.validateErrors.length > 0) {
-                    $scope.errors = res.validateErrors;
+                if (data.validateErrors && data.validateErrors.length > 0) {
+                    $scope.errors = data.validateErrors;
                 } else {
-                    $scope.errors = [];
-                    $scope.comments.push({commentText: comment, createdOn: new Date()});
+                    $location.path('/projects');
                 }
             })
     };
