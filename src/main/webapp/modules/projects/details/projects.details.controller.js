@@ -26,6 +26,7 @@ app.controller('ProjectsDetailsController', function ($scope, HomeService, Compa
     };
 
     function _save(model) {
+        console.log(model);
         if (!$scope.isNew) {
             model.remove = false;
             if (model.companyId) {

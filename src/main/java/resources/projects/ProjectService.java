@@ -44,6 +44,7 @@ public class ProjectService {
     public static void save(Project project) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
+        project.setPaymentAmount(0);
         session.save(project);
         session.getTransaction().commit();
     }

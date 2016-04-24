@@ -26,7 +26,7 @@
 <div ng-if="context.id == user.id && invites.length > 0">
     <h4>My pending invites</h4>
     <div ng-repeat="invite in invites">
-        {{invite.user.email}} {{invite.createdOn}} {{invite.status}} <a href="/companies/{{invite.company.id}}">{{invite.company.title}}</a>
+        {{invite.user.email}} {{invite.createdOn}} {{invite.status}} <a href="/companies/{{invite.company.id}}/page">{{invite.company.title}}</a>
         <button ng-click="accept(invite.id, invite.companyId)">Accept Invite</button>
         <button ng-click="decline(invite.id, invite.companyId)">Decline Invite</button>
     </div>

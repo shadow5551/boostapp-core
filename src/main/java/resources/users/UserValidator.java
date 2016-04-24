@@ -46,6 +46,13 @@ public class UserValidator extends Validator {
             return result;
         }
 
+        User user = UserService.getByEmail(email);
+        if (user != null) {
+            this.addError("uses", "User with such email already exists");
+            result.errors = this.getErrors();
+            return result;
+        }
+
         return result;
     }
 }
