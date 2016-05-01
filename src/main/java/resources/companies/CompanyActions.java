@@ -33,6 +33,9 @@ public class CompanyActions extends ActionSupport {
 
     public String view() throws Exception {
         User user = Auth.getCurrentUser();
+        if (user != null && user.getIsArchived()) {
+            return SUCCESS;
+        }
         List<CompanyMember> cms = CompanyMembersService.getByUserId(user.getId());
 
         List<Company> companies = new ArrayList<Company>();
@@ -49,6 +52,10 @@ public class CompanyActions extends ActionSupport {
     }
 
     public String update() throws Exception {
+        User user = Auth.getCurrentUser();
+        if (user != null && user.getIsArchived()) {
+            return SUCCESS;
+        }
         if (this.getRemove()) {
             CompanyService.delete(this.getId());
             return SUCCESS;
@@ -68,6 +75,11 @@ public class CompanyActions extends ActionSupport {
     }
 
     public String create() throws Exception {
+        User user = Auth.getCurrentUser();
+        if (user != null && user.getIsArchived()) {
+            return SUCCESS;
+        }
+
         ValidateResult data = validator.validate(this);
 
         if (data.hasErrors()) {

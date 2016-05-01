@@ -48,6 +48,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'modules/404/404.view.html',
             controller: '404Controller'
         })
+        .when('/admin', {
+            templateUrl: 'modules/admin/admin.view.html',
+            controller: 'AdminController'
+        })
         .otherwise({
             redirectTo: '/404'
         });
@@ -60,6 +64,9 @@ app.controller('boostapp', function ($scope, UserService, context, $window) {
             .then(function(res) {
                 context.set(res.data.currentUser);
                 $scope.context = res.data.currentUser;
+                if($scope.context && $scope.context.isArchived && $window.location.pathname !== '/404') {
+                    $window.location = '/404';
+                }
             });
     };
 

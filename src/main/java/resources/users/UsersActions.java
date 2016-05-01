@@ -22,11 +22,16 @@ public class UsersActions extends ActionSupport implements SessionAware {
     private String repeatPassword;
     private User currentUser;
     private boolean signout;
+    private boolean list;
+    private String block;
+    private List<User> users;
+    private Integer id;
 
     private SessionMap<String, Object> session;
     private List<Map<String, String>> validateErrors;
     private UserValidator validator = new UserValidator();
     private SignInValidator signInValidator = new SignInValidator();
+    private UserBlockValidator userBlockValidator = new UserBlockValidator();
 
     public String execute() throws Exception {
         return this.create();
@@ -36,7 +41,10 @@ public class UsersActions extends ActionSupport implements SessionAware {
     public String view() throws Exception {
         User user = Auth.getCurrentUser();
 
-        if (user.getEmail() != null) {
+        if (this.getList()) {
+            List<User> users = UserService.getAll();
+            this.setUsers(users);
+        } else if (user.getEmail() != null) {
             this.setCurrentUser(user);
         } else {
             this.setCurrentUser(null);
@@ -62,7 +70,31 @@ public class UsersActions extends ActionSupport implements SessionAware {
 
     //signin
     public String update() throws Exception {
-        if (this.getSignout()) {
+        if (this.getBlock() != null && this.getBlock().contentEquals("block")) {
+            ValidateResult data = userBlockValidator.validate(this);
+
+            if (data.hasErrors()) {
+                this.setValidateErrors(data.errors);
+                return SUCCESS;
+            }
+
+            User user = UserService.getById(this.getId());
+            user.setIsArchived(true);
+            UserService.update(user);
+            return SUCCESS;
+        } else if (this.getBlock() != null && this.getBlock().contentEquals("unblock")) {
+            ValidateResult data = userBlockValidator.validate(this);
+
+            if (data.hasErrors()) {
+                this.setValidateErrors(data.errors);
+                return SUCCESS;
+            }
+
+            User user = UserService.getById(this.getId());
+            user.setIsArchived(false);
+            UserService.update(user);
+            return SUCCESS;
+        } else if (this.getSignout()) {
             Auth.unsetCurrentUser(this.session);
             return SUCCESS;
         }
@@ -134,4 +166,20 @@ public class UsersActions extends ActionSupport implements SessionAware {
     public boolean getSignout() { return this.signout; }
 
     public void setSignout(boolean signout) { this.signout = signout; }
+
+    public boolean getList() { return this.list; }
+
+    public void setList(boolean list) { this.list = list; }
+
+    public List<User> getUsers() { return this.users; }
+
+    public void setUsers(List<User> u) { this.users = u; }
+
+    public String getBlock() { return this.block; }
+
+    public void setBlock(String b) { this.block = b; }
+
+    public Integer getId() { return this.id; }
+
+    public void setId(Integer id) { this.id = id; }
 }

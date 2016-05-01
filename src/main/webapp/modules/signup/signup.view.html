@@ -1,11 +1,11 @@
-<div ng-repeat="error in errors">
+<div class="alert alert-danger" role="alert" ng-repeat="error in errors">
     {{error}}
 </div>
 
 <div>
-    <input type="text" ng-model="email" placeholder="email"><br><br>
-    <input type="password" ng-model="password" placeholder="password"><br><br>
-    <input type="password" ng-model="repeatPassword" placeholder="password"><br><br>
-    <button ng-click="signup()">Signup</button>
+    <input type="text" ng-model="email" placeholder="email" class="form-control"><br>
+    <input type="password" ng-model="password" placeholder="password" class="form-control"><br>
+    <input type="password" ng-model="repeatPassword" placeholder="password" class="form-control"><br>
+    <button ng-click="signup()" class="btn btn-success" style="float: right">Signup</button>
     <a href="/signin">Sign In</a>
 </div>

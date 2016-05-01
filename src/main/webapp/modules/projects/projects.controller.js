@@ -1,20 +1,24 @@
-app.controller('ProjectsController', function ($scope, HomeService, ProjectsService, $routeParams, context) {
+app.controller('ProjectsController', function ($scope, HomeService, ProjectsService, $routeParams, context, $window) {
     $scope.projects = [];
     $scope.comments = [];
 
     $scope.context = context.get();
 
+    if($scope.context && $scope.context.isArchived && $window.location.pathname !== '/404') {
+        $window.location = '/404';
+    }
+
     $scope.save = function(model) {
         if (model.isEdit) {
             model.remove = false;
-            return ProjectsService.updateOrDelete(model);
+            return ProjectsService.update(model);
         } else {
             return ProjectsService.create(model);
         }
     };
 
     $scope.remove = function(id) {
-        return ProjectsService.updateOrDelete({id: id, remove: true})
+        return ProjectsService.update({id: id, remove: true})
             .then(function() {
                 $scope.projects = $scope.projects.filter(function(p) {
                     return p.id != id;

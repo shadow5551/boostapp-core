@@ -1,10 +1,9 @@
-<h4>Projects</h4>
-<div ng-if="context">
-    <a href="/projects/new">Create Project</a>
-</div>
+<h4>Projects</h4> <a href="/projects/new" ng-if="context">Create Project</a>
 <br>
-<div ng-repeat="project in projects" style="background: cornflowerblue; width: 300px; margin: 5px; padding: 5px">
-    <a href="/projects/{{project.id}}/page">{{project.title}}</a>
-    <div>{{project.description}}</div>
-    <span>${{project.paymentAmount}}</span> of <span>${{project.amount}}</span>
+<div class="row">
+    <div ng-repeat="project in projects" class="col-md-10 col-sm-7 col-lg-12" style="border-radius: 3px;background: cornflowerblue; margin: 5px; padding: 5px">
+        <a href="/projects/{{project.id}}/page">{{project.title}}</a>
+        <div>{{project.description}}</div>
+        <span>${{project.paymentAmount}}</span> of <span>${{project.amount}}</span>
+    </div>
 </div>

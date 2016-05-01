@@ -1,10 +1,14 @@
-app.controller('CompaniesController', function ($scope, HomeService, CompanyService, $routeParams, $location, context) {
+app.controller('CompaniesController', function ($scope, HomeService, CompanyService, $window, $routeParams, $location, context) {
     $scope.model = {};
     $scope.companies = [];
 
     $scope.context = context.get();
     if (!$scope.context) {
         return $location.path('/404');
+    }
+
+    if($scope.context && $scope.context.isArchived && $window.location.pathname !== '/404') {
+        $window.location = '/404';
     }
 
     return CompanyService.getCompanies()

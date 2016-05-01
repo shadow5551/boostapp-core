@@ -3,10 +3,11 @@
 </div>
 <h3>Project {{!isNew ? 'edit' : 'add'}}</h3>
 <br>
-<input type="text" placeholder="title" ng-model="model.title"><br>
-<input type="number" placeholder="amount" ng-model="model.amount"><br>
-<textarea name="" id="" cols="30" rows="10" ng-model="model.description">Description</textarea><br>
-<select ng-model="model.companyId" ng-if="isNew">
+<input type="text" placeholder="title" ng-model="model.title" class="form-control"><br>
+<input type="number" placeholder="amount" ng-model="model.amount" class="form-control"><br>
+<textarea name="" id="" cols="30" rows="10" ng-model="model.description" class="form-control">Description</textarea><br>
+<select ng-model="model.companyId" ng-if="isNew" class="form-control">
+    <option value="">Select company</option>
     <option ng-repeat="company in companies" ng-value="company.id">{{company.title}}</option>
 </select><br><br>
-<button ng-click="save(model)">{{!isNew ? 'Update' : 'Create'}}</button>
+<button ng-click="save(model)" class="btn btn-success" style="float:right;">{{!isNew ? 'Update' : 'Create'}}</button>

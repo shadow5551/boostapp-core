@@ -1,7 +1,8 @@
-<h4>Companies</h4>
-<a href="/companies/new" style="float:right" ng-if="context">Create My Company</a>
-<div ng-repeat="company in companies" style="background: #00FFaa; width: 200px; margin-bottom: 10px;">
-    <a href="/companies/{{company.id}}/page">{{company.title}}</a>
-    <div>{{company.tagLine}}</div>
-    <hr>
+<h4>Companies</h4> <a href="/companies/new" ng-if="context">Create Company</a>
+<br>
+<div class="row">
+    <div ng-repeat="company in companies" class="col-md-10 col-sm-7 col-lg-12" style="border-radius: 3px;background: cornflowerblue; margin: 5px; padding: 5px">
+        <a href="/companies/{{company.id}}/page">{{company.title}}</a>
+        <div>{{company.tagLine}}</div>
+    </div>
 </div>

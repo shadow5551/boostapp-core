@@ -51,6 +51,7 @@ public class UserService {
     public static void save(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
+        user.setIsArchived(false);
         session.save(user);
         session.getTransaction().commit();
     }
@@ -68,9 +69,10 @@ public class UserService {
         session.beginTransaction();
         User existingPerson = (User) session.get(User.class, user.getId());
 
-        //work with user
+        existingPerson.setIsArchived(user.getIsArchived());
 
         session.save(existingPerson);
         session.getTransaction().commit();
     }
+
 }

@@ -26,6 +26,18 @@ app.factory('UserService', ['Service', function(Service) {
 
         getById: function(id) {
             return Service.request('/api/user?id='+id);
+        },
+
+        list: function() {
+            return Service.request('/api/users?list=true', "GET");
+        },
+
+        blockUser: function(id) {
+            return Service.request('/api/users?block=block&id='+id, "PUT");
+        },
+
+        unBlockUser: function(id) {
+            return Service.request('/api/users?block=unblock&id='+id, "PUT");
         }
     }
 }]);

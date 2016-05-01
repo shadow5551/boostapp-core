@@ -4,7 +4,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import resources.infrastructure.Auth;
 import resources.infrastructure.ValidateResult;
+import resources.users.User;
 import resources.users.UserValidator;
 
 import java.util.List;
@@ -33,6 +35,11 @@ public class ProjectsAction extends ActionSupport {
     }
 
     public String view() throws Exception {
+        User user = Auth.getCurrentUser();
+        if (user != null && user.getIsArchived()) {
+            return SUCCESS;
+        }
+
         if (this.getCompanyId() != null) {
             List<Project> projects = ProjectService.getByCompanyId(this.getCompanyId());
             this.setProjects(projects);
@@ -45,6 +52,11 @@ public class ProjectsAction extends ActionSupport {
     }
 
     public String update() throws Exception {
+        User user = Auth.getCurrentUser();
+        if (user != null && user.getIsArchived()) {
+            return SUCCESS;
+        }
+
         if (this.getRemove()) {
             ValidateResult data = removeValidator.validate(this);
 
@@ -69,6 +81,11 @@ public class ProjectsAction extends ActionSupport {
     }
 
     public String create() throws Exception {
+        User user = Auth.getCurrentUser();
+        if (user != null && user.getIsArchived()) {
+            return SUCCESS;
+        }
+
         ValidateResult data = validator.validate(this);
 
         if (data.hasErrors()) {

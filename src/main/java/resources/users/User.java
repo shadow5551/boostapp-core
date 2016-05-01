@@ -21,6 +21,9 @@ public class User implements Serializable {
     @Column(name = "role_id")
     private int roleId;
 
+    @Column(name = "isArchived")
+    private boolean isArchived;
+
     public User () {}
 
     public int getId() {
@@ -53,5 +56,13 @@ public class User implements Serializable {
 
     public void setRoleId(int id) {
         this.id = id;
+    }
+
+    public boolean getIsArchived() {
+        return isArchived;
+    }
+
+    public void setIsArchived(boolean isArchived) {
+        this.isArchived = isArchived;
     }
 }

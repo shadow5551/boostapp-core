@@ -13,7 +13,7 @@
     <br>
     <div ng-if="context">
         <input type="number" ng-model="model.payment" placeholder="Add payment amount here">
-        <button ng-click="addPayment()">Add payment</button>
+        <button ng-click="addPayment()" class="btn btn-success btn-sm">Add payment</button>
     </div>
     <hr>
     <div ng-if="!payments || payments.length === 0">
@@ -40,6 +40,6 @@
         <textarea cols="30" rows="10" ng-model="comment">
             Comment here
         </textarea><br>
-        <button ng-click="createComment(comment)">Create Comment</button>
+        <button ng-click="createComment(comment)" class="btn btn-small btn-default">Create Comment</button>
     </div>
 </div>

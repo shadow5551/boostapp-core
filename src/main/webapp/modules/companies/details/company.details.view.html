@@ -1,9 +1,9 @@
-<div ng-repeat="error in errors">
+<div class="alert alert-danger" role="alert" ng-repeat="error in errors">
     {{error}}
 </div>
 <br>
-<input type="text" ng-model="model.title" placeholder="Title">
-<br><br>
-<input type="text" placeholder="Tag Line" ng-model="model.tagLine">
-<br><br>
-<button ng-click="save(model)">{{ isNew ? 'Create' : 'Update'}}</button>
+<input type="text" ng-model="model.title" placeholder="Title" class="form-control">
+<br>
+<input type="text" class="form-control" placeholder="Tag Line" ng-model="model.tagLine">
+<br>
+<button class="form-control" ng-click="save(model)">{{ isNew ? 'Create' : 'Update'}}</button>
