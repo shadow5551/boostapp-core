@@ -16,6 +16,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'modules/projects/page/projects.page.view.html',
             controller: 'ProjectsPageController'
         })
+        .when('/news', {
+            templateUrl: 'modules/news/news.view.html',
+            controller: 'NewsController'
+        })
         .when('/projects/:id', {
             templateUrl: 'modules/projects/details/projects.details.view.html',
             controller: 'ProjectsDetailsController'

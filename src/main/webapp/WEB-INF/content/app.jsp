@@ -20,7 +20,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="/" class="navbar-brand">Home</a> - <a class="navbar-brand" href="/projects">Projects</a> - <a class="navbar-brand" ng-if="context" href="/companies">My Companies</a>
+                <a href="/" class="navbar-brand">Home</a> - <a class="navbar-brand" href="/projects">Projects</a> - <a class="navbar-brand" href="/news">News</a> - <a class="navbar-brand" ng-if="context" href="/companies">My Companies</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <a type="submit" class="btn btn-success" href="/signin" style="float: right; margin-top:7px;" ng-if="!context.email">Sign in</a>
@@ -61,5 +61,7 @@
 <script src="<s:url value="modules/companies/company.controller.js" />"></script>
 <script src="<s:url value="modules/404/404.controller.js" />"></script>
 <script src="<s:url value="modules/admin/admin.controller.js" />"></script>
+<script src="<s:url value="modules/news/news.controller.js" />"></script>
+<script src="<s:url value="modules/news/news.service.js" />"></script>
 </body>
 </html>

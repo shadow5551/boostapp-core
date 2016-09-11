@@ -1,0 +1,8 @@
+<h4>News</h4> <a href="/news/new" ng-if="context">Create News</a>
+<br>
+<div class="row">
+    <div ng-repeat="new1 in news" class="col-md-10 col-sm-7 col-lg-12" style="border-radius: 3px;background: cornflowerblue; margin: 5px; padding: 5px">
+        <a href="/news/{{new1.id}}/page">{{new1.title}}</a>
+       <!-- <div>{{new1.content}}</div> -->
+    </div>
+</div>

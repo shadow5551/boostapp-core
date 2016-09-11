@@ -1,13 +1,12 @@
 package resources.comments;
 
-import java.util.List;
-import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import resources.comments.Comment;
-import resources.companies.Company;
 import resources.infrastructure.SessionHelper;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 public class CommentService {
     @Resource(name="sessionFactory")
@@ -33,7 +32,6 @@ public class CommentService {
         session.beginTransaction();
         session.save(comment);
         session.getTransaction().commit();
-
         return comment;
     }
 
