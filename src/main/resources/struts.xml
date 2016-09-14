@@ -21,6 +21,13 @@
             </interceptor-ref>
             <result type="json" />
         </action>
+	<action name="/api/news/*" class="resources.news.NewsAction">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="json">
+                <param name="enableSMD">true</param>
+            </interceptor-ref>
+            <result type="json" />
+        </action>
         <action name="/api/payments/*" class="resources.payments.PaymentActions">
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="json">
@@ -65,6 +72,14 @@
             <result type="json" />
         </action>
         <action name="/api/project/*" class="resources.projects.ProjectByIdAction">
+            <param name="id">{1}</param>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="json">
+                <param name="enableSMD">true</param>
+            </interceptor-ref>
+            <result type="json" />
+        </action>
+        <action name="/api/new/*" class="resources.news.NewsByIdAction">
             <param name="id">{1}</param>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="json">

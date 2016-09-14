@@ -1,0 +1,12 @@
+<div ng-repeat="error in errors">
+    {{error}}
+</div>
+<h3>News {{!isNew ? 'edit' : 'add'}}</h3>
+<br>
+<input type="text" placeholder="title" ng-model="model.title" class="form-control"><br>
+<textarea name="" id="" cols="30" rows="10" ng-model="model.content" class="form-control">Content</textarea><br>
+<select ng-model="model.companyId" ng-if="isNew" class="form-control">
+    <option value="">Select company</option>
+    <option ng-repeat="company in companies" ng-value="company.id">{{company.title}}</option>
+</select><br><br>
+<button ng-click="save(model)" class="btn btn-success" style="float:right;">{{!isNew ? 'Update' : 'Create'}}</button>

@@ -1,0 +1,9 @@
+<div>
+    <div ng-repeat="error in errors" style="background: crimson">
+        {{error}}
+    </div>
+
+    <h3 align="center">{{model.title}} <span ng-if="context"><a href="/news/{{model.id}}">Edit</a> / <a href="#" ng-click="remove()">Remove</a></span></h3><br>
+    <strong>{{model.content}}</strong><br>
+    </div>
+</div>

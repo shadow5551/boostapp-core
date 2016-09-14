@@ -18,17 +18,27 @@ public class News implements Serializable {
     @Column(name = "title")
     private String title;
 
-    /*@Column(name = "data")
-    private Date data;*/
-
     @Column(name = "content")
-    private Date content;
+    private String content;
 
-    public int getIdnews() {
+    @Column(name = "companyId")
+    private int companyId;
+
+    public News() {}
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setIdnews(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -40,19 +50,11 @@ public class News implements Serializable {
         this.title = title;
     }
 
-    /*public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }*/
-
-    public Date getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(Date content) {
+    public void setContent(String content) {
         this.content = content;
     }
 }

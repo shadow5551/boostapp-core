@@ -16,6 +16,18 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'modules/projects/page/projects.page.view.html',
             controller: 'ProjectsPageController'
         })
+        .when('/news/:id/page', {
+            templateUrl: 'modules/news/page/news.page.view.html',
+            controller: 'NewsPageController'
+        })
+        .when('/news', {
+            templateUrl: 'modules/news/news.view.html',
+            controller: 'NewsController'
+        })
+        .when('/news/:id', {
+            templateUrl: 'modules/news/details/news.details.view.html',
+            controller: 'NewsDetailsController'
+        })
         .when('/projects/:id', {
             templateUrl: 'modules/projects/details/projects.details.view.html',
             controller: 'ProjectsDetailsController'
@@ -47,10 +59,6 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         .when('/404', {
             templateUrl: 'modules/404/404.view.html',
             controller: '404Controller'
-        })
-        .when('/block', {
-            templateUrl: 'modules/block/blocked.view.html',
-            controller: 'BlockedController'
         })
         .when('/admin', {
             templateUrl: 'modules/admin/admin.view.html',

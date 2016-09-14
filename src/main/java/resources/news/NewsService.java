@@ -25,6 +25,16 @@ public class NewsService {
             return news;
         }
 
+    public static List<News> getByCompanyId(Integer id) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM News WHERE companyId = " + id);
+        List<News> news = query.list();
+        session.getTransaction().commit();
+
+        return news;
+    }
 
 
         public static News getById(Integer id) {
@@ -36,36 +46,32 @@ public class NewsService {
             return n;
         }
 
-        /*public static void save(News news) {
+        public static void save(News news) {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            project.setPaymentAmount(0);
-            session.save(project);
+            session.save(news);
             session.getTransaction().commit();
         }
 
         public static void delete(Integer id) {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            Project project = (Project) session.get(Project.class, id);
-            if (project != null) {
-                session.delete(project);
+            News news = (News) session.get(News.class, id);
+            if (news != null) {
+                session.delete(news);
             }
             session.getTransaction().commit();
         }
 
-        public static void update(Project project) {
+        public static void update(News news) {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            Project existingProject = (Project) session.get(Project.class, project.getId());
+            News existingNews = (News) session.get(News.class, news.getId());
 
-            existingProject.setTitle(project.getTitle());
-            existingProject.setDescription(project.getDescription());
-            existingProject.setAmount(project.getAmount());
-            existingProject.setPaymentAmount(project.getPaymentAmount());
-
-            session.save(existingProject);
+            existingNews.setTitle(news.getTitle());
+            existingNews.setContent(news.getContent());
+            session.save(existingNews);
             session.getTransaction().commit();
         }
-*/
+
 }

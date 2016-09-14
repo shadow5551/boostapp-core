@@ -8,25 +8,25 @@ app.controller('NewsController', function ($scope, HomeService, NewsService, $ro
         $window.location = '/404';
     }
 
-   /* $scope.save = function(model) {
+    $scope.save = function(model) {
         if (model.isEdit) {
             model.remove = false;
-            return ProjectsService.update(model);
+            return NewsService.update(model);
         } else {
-            return ProjectsService.create(model);
+            return NewsService.create(model);
         }
     };
 
     $scope.remove = function(id) {
-        return ProjectsService.update({id: id, remove: true})
+        return NewsService.update({id: id, remove: true})
             .then(function() {
-                $scope.projects = $scope.projects.filter(function(p) {
-                    return p.id != id;
+                $scope.news = $scope.news.filter(function(n) {
+                    return n.id != id;
                 });
             })
-    };*/
+    };
 
-    return NewsService.getNews()
+    return HomeService.getNews()
         .then(function(data) {
             //console.log(data);
             $scope.news = data.data.news;

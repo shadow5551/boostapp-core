@@ -1,13 +1,15 @@
 package resources.news;
 
 import com.opensymphony.xwork2.ActionSupport;
-import resources.projects.ProjectsAction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.struts2.convention.annotation.Result;
+import resources.projects.ProjectsAction;
 
 /**
  * Created by root on 10.9.16.
  */
+@Result(type = "json")
 public class NewsByIdAction extends ActionSupport {
     private static final long serialVersionUID = 9037336532369476225L;
     private static final Logger log = LogManager.getLogger(ProjectsAction.class);
@@ -15,7 +17,7 @@ public class NewsByIdAction extends ActionSupport {
     private Integer id;
     private News news;
 
-    public String view() throws Exception {
+    public String editNew() throws Exception {
         News news = NewsService.getById(this.getId());
         this.setNews(news);
 
@@ -38,4 +40,3 @@ public class NewsByIdAction extends ActionSupport {
         this.news = n;
     }
 }
-
