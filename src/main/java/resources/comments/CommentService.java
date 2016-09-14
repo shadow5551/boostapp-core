@@ -1,12 +1,13 @@
 package resources.comments;
 
+import java.util.List;
+import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import resources.comments.Comment;
+import resources.companies.Company;
 import resources.infrastructure.SessionHelper;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 public class CommentService {
     @Resource(name="sessionFactory")
@@ -15,6 +16,16 @@ public class CommentService {
     public static Comment getById(Integer id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Comment.class, id);
+    }
+
+    public static List<Comment> getAll() {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM Comment");
+        List<Comment> comments = query.list();
+        session.getTransaction().commit();
+
+        return comments;
     }
 
     public static List<Comment> getAllByProjectId(Integer projectId) {
@@ -32,6 +43,7 @@ public class CommentService {
         session.beginTransaction();
         session.save(comment);
         session.getTransaction().commit();
+
         return comment;
     }
 
