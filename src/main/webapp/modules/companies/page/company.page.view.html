@@ -23,9 +23,16 @@
         <div>{{project.description}}</div>
         <div>${{project.paymentAmount / 100}} of ${{project.amount / 100}}</div>
     </div>
-    <div style="float:right"><a class="btn btn-sm btn-success" href="/projects/{{project.id}}">Edit</a> <a class="btn btn-sm btn-success" href="#" ng-click="removeProject(project.id)">Remove</a></div>
-    <div style="clear: both"></div>
 </div>
+
+    <h4>Company's News</h4>
+    <div ng-repeat="new1 in news" style="background: #5cb85c; border-radius: 4px; margin: 5px;padding: 7px;">
+        <div style="float:left">
+        </div>
+        <h4><a href="/news/{{new1.id}}/page" style="color:black">{{new1.title}}</a></h4>
+        <div>{{new1.content}}</div>
+            </div>
+
 
 <div ng-if="invites.length > 0">
     <h4>Pending invites to company</h4>

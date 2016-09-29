@@ -2,8 +2,9 @@
     <div ng-repeat="error in errors" style="background: crimson">
         {{error}}
     </div>
-
-    <h3 align="center">{{model.title}} <span ng-if="context"><a href="/news/{{model.id}}">Edit</a> / <a href="#" ng-click="remove()">Remove</a></span></h3><br>
+<!--доделать верстку-->
+    <h3 align="center">{{model.title}} <span ng-if="context"><a href="/news/{{model.id}}" class="btn btn-sm btn-warning">Edit</a> / <a href="#" class="btn btn-sm btn-danger" ng-click="remove()">Remove</a></span></h3><br>
+    <h3 align="center"><a href="/api/get-news-pdf?newsId={{model.id}}" class="btn btn-info" target="_blank">Get News Report</a><a href="/api/get-all-news-xls?newsId={{model.id}}" class="btn btn-info" target="_blank">Get All News Report</a><a href="/api/get-all-news-csv?newsId={{model.id}}" class="btn btn-info" target="_blank">Get News CSV Report</a><br></h3>
     <strong>{{model.content}}</strong><br>
-    </div>
+</div>
 </div>

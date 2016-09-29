@@ -4,10 +4,6 @@ app.factory('NewsService', ['Service', function(Service) {
             return Service.request('/api/news?companyId=' + companyId);
         },
 
-       /* getNews: function() {
-            return Service.request('/api/news');
-        },*/
-
         create: function(data) {
         return Service.request('/api/news', 'POST', data);
         },

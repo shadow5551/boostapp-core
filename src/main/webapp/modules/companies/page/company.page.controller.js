@@ -1,8 +1,10 @@
-app.controller('CompanyPageController', function ($scope, HomeService, InviteService, CompanyService, ProjectsService, UserService, $routeParams, $location, context) {
+app.controller('CompanyPageController', function ($scope, HomeService, InviteService, NewsService, CompanyService, ProjectsService, UserService, $routeParams, $location, context) {
     $scope.model = {};
+    $scope.model2 = {};
     $scope.context = context.get();
     $scope.projects = [];
     $scope.errors = [];
+    $scope.news = [];
 
     $scope.removeProject = function(projectId) {
         if (confirm("Are you sure?")) {
@@ -21,6 +23,24 @@ app.controller('CompanyPageController', function ($scope, HomeService, InviteSer
         }
     };
 
+    $scope.removeNews = function(newsId) {
+        if (confirm("Are you surerrrr?")) {
+            return NewsService.delete({
+                id: newsId
+            })
+                .then(function (data) {
+                    if (data.validateErrors && data.validateErrors.length > 0) {
+                        $scope.errors = data.validateErrors;
+                    } else {
+                        $scope.news = $scope.news.filter(function (n) {
+                            return n.id != newsId;
+                        });
+                    }
+                });
+        }
+    };
+
+
     return CompanyService.getById($routeParams.id)
         .then(function(data) {
             $scope.model = data.data.company;
@@ -29,6 +49,7 @@ app.controller('CompanyPageController', function ($scope, HomeService, InviteSer
                 $location.path('/404');
             } else {
                 return ProjectsService.getProjects($routeParams.id);
+                //return NewsService.getNews($routeParams.id)
             }
         })
         .then(function(projects) {
@@ -37,7 +58,19 @@ app.controller('CompanyPageController', function ($scope, HomeService, InviteSer
 
                 return InviteService.getInvitesByCompanyId($routeParams.id);
             }
+        }).then(function(data1) {
+            $scope.model2 = data1.data.company;
+                return NewsService.getNews($routeParams.id);
+
         })
+        .then(function(news) {
+            if (news.data.news) {
+                $scope.news = news.data.news;
+
+                return InviteService.getInvitesByCompanyId($routeParams.id);
+            }
+        })
+
         .then(function(invites) {
             invites.data.invites.forEach(function(i) {
                return UserService.getById(i.userId)
